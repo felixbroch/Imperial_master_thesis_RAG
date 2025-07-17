@@ -25,21 +25,7 @@ def split_by_section_headings_with_meta(text, source_type, max_chunk_words=200, 
 - Metadata preservation for each chunk
 - Citation extraction and tracking
 
-### 2. Embedding and Vector Storage
-
-#### Embedding Model
-- **Model**: BAAI/bge-base-en-v1.5
-- **Dimensions**: 768
-- **Optimisation**: English academic text
-- **Batch Processing**: Efficient encoding of multiple chunks
-
-#### Vector Database
-- **Engine**: FAISS (Facebook AI Similarity Search)
-- **Index Type**: IndexFlatL2 (L2 distance)
-- **Search Method**: Exact nearest neighbour
-- **Data Type**: float32 for compatibility
-
-### 3. Retrieval System
+### 2. Retrieval System
 
 #### Semantic Search
 The retrieval system implements semantic search using:
@@ -57,7 +43,7 @@ Each retrieved chunk maintains:
 - Citation information
 - Relevance score
 
-### 4. Response Generation
+### 3. Response Generation
 
 #### Prompt Engineering
 The system uses structured prompts with:
@@ -74,7 +60,7 @@ The system uses structured prompts with:
 - **Parameters**: Configurable temperature, top_p, max_tokens
 - **Context Window**: 4096 tokens
 
-### 5. Citation System
+### 4. Citation System
 
 #### Citation Extraction
 Automatic identification of academic citations using regex:
