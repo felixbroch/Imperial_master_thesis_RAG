@@ -55,14 +55,14 @@ The system currently processes documents related to dynamic pricing research:
 ### Installation Steps
 
 1. **Clone the repository**
-   ```bash
-git clone https://github.com/FelixBROCHIER/Imperial_master_thesis_RAG.git
-   ```
+    ```bash
+    git clone https://github.com/felixbroch/Imperial_master_thesis_RAG.git
+    ```
 
 2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 3. **Download the LLM model**
    - Download a quantised model
