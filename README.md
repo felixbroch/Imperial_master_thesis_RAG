@@ -9,10 +9,8 @@ This system was designed to understand and implement the core components of a RA
 ### Key Objectives
 
 - Build a complete RAG system using open-source components
-- Implement local inference for privacy and control
 - Create transparent document attribution and citation tracking
 - Develop modular components for easy extension and customisation
-- Support academic research workflows with proper source attribution
 
 ## System Architecture
 
@@ -54,17 +52,11 @@ The system currently processes documents related to dynamic pricing research:
 
 ## Installation and Setup
 
-### Prerequisites
-- Python 3.10 or higher
-- At least 8GB RAM for model loading
-- 4GB free disk space for models and data
-
 ### Installation Steps
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd Imperial_master_thesis_RAG
+git clone https://github.com/FelixBROCHIER/Imperial_master_thesis_RAG.git
    ```
 
 2. **Install dependencies**
@@ -73,7 +65,7 @@ The system currently processes documents related to dynamic pricing research:
    ```
 
 3. **Download the LLM model**
-   - Download a quantized model
+   - Download a quantised model
    - Place the model file in an accessible location
    - Update the model path in the notebook
 
@@ -88,102 +80,3 @@ The system requires minimal configuration:
 1. **Model Path**: Update the LLM model path in the notebook
 2. **Document Paths**: Verify document locations match the code
 3. **Citation Index**: Modify reference metadata if using different sources
-
-## Usage
-
-### Basic RAG Query
-```python
-# Initialize the system
-model = SentenceTransformer("BAAI/bge-base-en-v1.5")
-llm = Llama(model_path="path/to/model.gguf", n_ctx=4096)
-
-# Generate answer
-prompt, answer = generate_rag_answer(
-    query="What are the benefits of dynamic pricing?",
-    embed_model=model,
-    index=index,
-    chunk_lookup=chunk_lookup,
-    citation_index=citation_index,
-    llm=llm
-)
-```
-
-### Running the Jupyter Notebook
-1. Start Jupyter: `jupyter notebook`
-2. Open `rag2.ipynb`
-3. Run cells sequentially to build the system
-4. Modify queries in the final cells to test different questions
-
-### Customisation Options
-
-**Chunk Size**: Adjust `max_chunk_words` for different context lengths
-**Overlap**: Modify `overlap_words` for context preservation
-**Retrieval Count**: Change `top_k` in retrieval functions
-**LLM Parameters**: Adjust `temperature`, `top_p`, and `max_tokens`
-
-## System Components
-
-### Document Chunking
-The system implements intelligent chunking that:
-- Preserves document structure using section headers
-- Maintains overlapping context between chunks
-- Tracks source attribution and citations
-- Handles multiple document types uniformly
-
-### Embedding Generation
-Uses BGE-base-en-v1.5 for creating dense vector representations:
-- High-quality semantic understanding
-- Optimised for English academic text
-- Efficient batch processing capabilities
-
-### Vector Search
-FAISS provides efficient similarity search:
-- Exact nearest neighbour search using L2 distance
-- Scalable to large document collections
-- Fast query processing for real-time applications
-
-### Response Generation
-Local LLM inference ensures:
-- Privacy-preserving processing
-- Consistent model behaviour
-- Customisable generation parameters
-- Transparent source attribution
-
-## Known Limitations
-
-### Model Dependencies
-- Requires significant computational resources for local inference
-- Model quality depends on the chosen LLM weights
-- Limited by the embedding model's language understanding
-
-### Document Processing
-- Currently optimised for academic text structure
-- Manual citation index maintenance required
-- Limited file format support
-
-### Scalability
-- Memory requirements scale with document collection size
-- Vector index rebuilding required for new documents
-- Sequential processing of large document sets
-
-## Future Extensions
-
-### Enhanced Retrieval
-- Hybrid search combining semantic and keyword matching
-- Dynamic chunk sizing based on content complexity
-- Multi-modal support for figures and tables
-
-### Advanced Generation
-- Citation verification and validation
-- Multi-document synthesis capabilities
-- Structured output formatting (tables, lists, references)
-
-### User Interface
-- Web-based interface for non-technical users
-- Real-time query processing
-- Document upload and management system
-
-### Integration Options
-- API endpoints for external applications
-- Database backends for persistent storage
-- Cloud deployment configurations
