@@ -1,0 +1,197 @@
+"XGBoost: A Scalable Tree Boosting System"
+
+Authors: Tianqi Chen, Carlos Guestrin (University of Washington)
+
+Abstract
+Tree boosting is a highly effective and widely used machine learning method. In this paper, we describe a scalable end-to-end tree boosting system called XGBoost, which is used widely by data scientists to achieve state-of-the-art results on many machine learning challenges. We propose a novel sparsity-aware algorithm for sparse data and a weighted quantile sketch for approximate tree learning. More importantly, we provide insights on cache access patterns, data compression, and sharding to build a scalable tree boosting system. By combining these insights, XGBoost scales beyond billions of examples using far fewer resources than existing systems.
+
+Keywords
+Large-scale Machine Learning
+
+1. Introduction
+Machine learning and data-driven approaches are becoming increasingly important across various domains. Smart spam classifiers protect our email by learning from massive amounts of spam data and user feedback. Advertising systems learn to match the right ads with the right context. Fraud detection systems protect banks from malicious attackers, while anomaly detection systems help experimental physicists identify events that could lead to new physics. Two critical factors drive the success of these applications: effective statistical models that capture complex data dependencies and scalable learning systems capable of training on large datasets.
+
+Among the machine learning methods used in practice, gradient tree boosting is one technique that stands out in many applications. Tree boosting has been shown to deliver state-of-the-art results on standard classification benchmarks. LambdaMART, a variant of tree boosting for ranking, achieves top performance on ranking problems. In addition to serving as a standalone predictor, tree boosting is also integrated into production pipelines for tasks such as ad click-through rate prediction. It has become the default ensemble method in challenges like the Netflix Prize.
+
+In this paper, we introduce XGBoost, a scalable machine learning system for tree boosting. The system is available as an open-source package. Its impact has been widely recognised through its adoption in numerous machine learning and data mining challenges. For instance, among 29 winning solutions published on Kaggle’s blog during 2015, 17 used XGBoost. Of these, eight relied exclusively on XGBoost, while most others combined it with neural networks in ensembles. In contrast, the second most popular method, deep neural networks, was used in 11 solutions. XGBoost also featured in every top-10 team at KDDCup 2015, where ensemble methods were reported to outperform a well-configured XGBoost model by only a small margin.
+
+These results demonstrate that our system delivers state-of-the-art performance across a wide variety of problems. Examples from winning solutions include store sales prediction, high-energy physics event classification, web text categorisation, customer behaviour prediction, motion detection, ad click-through rate prediction, malware classification, product categorisation, hazard risk prediction, and online course drop-out prediction. While domain-specific data analysis and feature engineering play crucial roles, the widespread adoption of XGBoost highlights its impact and importance in machine learning workflows.
+
+The primary factor behind XGBoost’s success is its scalability. It runs more than ten times faster than popular alternatives on a single machine and scales to billions of examples in distributed or memory-limited settings. This scalability is achieved through several key algorithmic and system-level innovations. These include a novel tree learning algorithm for handling sparse data, a theoretically justified weighted quantile sketch procedure for instance weighting, and efficient parallel and distributed computing. XGBoost also supports out-of-core computation, enabling data scientists to process hundreds of millions of examples on a desktop machine. Combining these features, XGBoost offers an end-to-end system that scales with minimal resource requirements.
+
+The main contributions of this paper are:
+
+The design and implementation of a highly scalable end-to-end tree boosting system.
+A theoretically justified weighted quantile sketch for efficient proposal calculation.
+A novel sparsity-aware algorithm for parallel tree learning.
+An effective cache-aware block structure for out-of-core tree learning.
+Although prior work exists on parallel tree boosting, directions such as out-of-core computation, cache-aware learning, and sparsity-aware optimisation have not been fully explored. More importantly, the integration of these elements into a single end-to-end system presents a unique and practical solution for real-world applications. This allows both data scientists and researchers to build powerful tree boosting variants. We also contribute improvements to regularised learning objectives, which are included here for completeness.
+
+The remainder of the paper is organised as follows. Section 2 reviews tree boosting and introduces a regularised objective. Section 3 describes the split-finding methods. Section 4 explains the system design, with experimental results provided where relevant. Section 5 discusses related work. Section 6 contains end-to-end evaluations. We conclude in Section 7.
+
+2. Tree Boosting in a Nutshell
+This section reviews gradient tree boosting algorithms. The derivation closely follows previous literature on gradient boosting, with specific improvements made to include a regularised objective that has proven useful in practice.
+
+2.1 Regularised Learning Objective
+
+For a given dataset with multiple examples and features, a tree ensemble model predicts the output using a sum of additive functions, each representing a decision tree. The idea is to construct a model composed of multiple regression trees, where each tree assigns a continuous score to its leaf nodes. These scores are then summed to form the final prediction.
+
+To train the model, we minimise a regularised objective function. This objective includes two parts: a loss function that measures the difference between the predicted value and the actual target, and a regularisation term that penalises the complexity of the model. The regularisation helps to smooth the learned weights and reduces the risk of overfitting. Intuitively, this encourages simpler, more predictive models.
+
+Compared to previous approaches such as Regularized Greedy Forest (RGF), the objective and corresponding learning algorithm used in XGBoost are simpler and more easily parallelised. When the regularisation parameter is set to zero, the objective reduces to traditional gradient tree boosting.
+
+2.2 Gradient Tree Boosting
+
+The tree ensemble model cannot be optimised using traditional methods in Euclidean space due to the presence of tree functions as parameters. Instead, the model is trained additively. At each iteration, a new tree is added to minimise the overall objective. The optimal tree is determined based on how well it reduces the loss when added to the existing model.
+
+A second-order approximation is used to speed up this optimisation. The first and second-order gradient statistics are computed from the loss function, and a simplified objective is derived for each boosting step. The optimal weight for each leaf node in a given tree structure can then be calculated directly from these gradient statistics.
+
+To build the best tree structure, a greedy algorithm is used. Starting from a single leaf, it iteratively adds branches that offer the greatest reduction in the loss. For each potential split, the algorithm evaluates the gain by comparing the gradients of instances in the left and right child nodes. The split that maximises the reduction in the objective is chosen.
+
+2.3 Shrinkage and Column Subsampling
+
+In addition to regularisation, XGBoost uses two important techniques to prevent overfitting:
+
+Shrinkage: This technique scales the newly added weights by a factor after each boosting step. It functions similarly to a learning rate in stochastic optimisation, reducing the influence of each individual tree and allowing future trees to make meaningful contributions. Shrinkage is particularly effective at controlling model complexity.
+Column Subsampling: Instead of using all features at every split, a random subset of columns is selected. This technique is commonly used in Random Forests and has been shown to further prevent overfitting. It also improves the efficiency of the algorithm, especially in the context of parallel learning.
+Together, these enhancements—regularisation, shrinkage, and column sampling—form the foundation of XGBoost’s tree boosting method. They allow for efficient training, effective regularisation, and scalable deployment on large datasets.
+
+3. Split Finding Algorithms
+One of the key challenges in tree learning is determining the best place to split a node. This section discusses different methods for finding splits efficiently and scalably.
+
+3.1 Basic Exact Greedy Algorithm
+
+The exact greedy algorithm evaluates every possible split on every feature. This method is used in most single-machine implementations of tree boosting, such as those in scikit-learn, R’s GBM, and the single-machine version of XGBoost.
+
+To do this efficiently, the algorithm first sorts the data by feature values. It then scans through the sorted data to accumulate gradient statistics and evaluate the quality of potential splits. This process is computationally intensive but yields high-accuracy splits. For smaller datasets or those that fit into memory, exact greedy splitting remains a robust choice.
+
+3.2 Approximate Algorithm
+
+While the exact algorithm is powerful, it becomes inefficient or even infeasible when datasets are too large to fit into memory or are distributed across machines. To address this, XGBoost implements an approximate algorithm that generates candidate split points using feature value percentiles.
+
+Instead of evaluating every possible split, the approximate algorithm discretises continuous features into buckets. It then aggregates statistics within each bucket and evaluates only the proposed split points. This drastically reduces computation time.
+
+There are two variants of this method:
+
+Global proposal: Candidate splits are generated once at the start of tree construction and reused at every level. This approach requires fewer computations but might miss better splits deeper in the tree.
+Local proposal: Candidate splits are regenerated after each split. This allows more fine-tuned refinement but requires more computational effort.
+Experiments show that local proposals often require fewer split candidates to achieve comparable or better accuracy. However, global proposals can match performance if given enough candidates.
+
+Most distributed tree learning algorithms, including XGBoost’s approximate mode, follow this bucketing framework. The method is efficient, supports large-scale data, and provides high-quality results with far less overhead than the exact method.
+
+3.3 Weighted Quantile Sketch
+
+In approximate splitting, choosing the right split candidates is crucial. XGBoost improves this process with a novel weighted quantile sketch algorithm that handles instance weights and ensures the accuracy of split proposals.
+
+Standard quantile sketches assume equal weights for all instances, but in real datasets, instances often carry different weights. Existing solutions either subsample randomly, which may miss important splits, or rely on heuristics without theoretical guarantees.
+
+XGBoost’s solution is a distributed sketch algorithm with provable accuracy guarantees. It supports operations such as merging and pruning while preserving approximation quality. This approach enables scalable, accurate, and distributed split proposal generation, even for large datasets with weighted entries.
+
+3.4 Sparsity-Aware Split Finding
+
+Real-world datasets are often sparse. Sparsity can arise from missing values, zero entries, or one-hot encoding. XGBoost is designed to handle all types of sparsity in a unified and efficient way.
+
+The core idea is to learn a default direction for each split—either left or right—so that missing values can still be routed meaningfully through the tree. During training, the algorithm evaluates both options and selects the default that yields the highest gain.
+
+Crucially, this method only evaluates non-missing entries, reducing computation and improving efficiency. Benchmarks show that the sparsity-aware algorithm is over 50 times faster than naive methods on datasets with extensive one-hot encoding.
+
+XGBoost treats missing values as informative and learns how to handle them effectively, making it suitable for a wide range of applications where sparse data is common.
+
+4. System Design
+In addition to algorithmic innovations, the design of an efficient system is crucial for scalable machine learning. This section presents XGBoost’s system-level optimisations, including memory-efficient data structures, parallelisation strategies, and support for out-of-core computation.
+
+4.1 Column Block for Parallel Learning
+
+Sorting the data to find optimal splits is one of the most time-consuming parts of tree learning. To minimise repeated sorting, XGBoost introduces an in-memory data structure called a block. Each block stores data in compressed column (CSC) format, with each column sorted by feature value.
+
+This block structure only needs to be computed once before training and can be reused throughout boosting iterations. During training, all leaves are evaluated collectively, allowing one linear scan through the pre-sorted block to collect necessary statistics for all potential splits.
+
+Blocks also facilitate parallelism. Statistics for each feature column can be gathered in parallel, making the split-finding step highly scalable. This structure is compatible with both exact and approximate algorithms, and supports column subsampling efficiently by selecting only relevant columns within a block.
+
+4.2 Cache-Aware Access
+
+While the block structure improves computational complexity, it introduces memory access issues. Specifically, fetching gradient statistics by row index leads to non-continuous memory access, which causes cache misses and slows down execution.
+
+To address this, XGBoost uses cache-aware prefetching. Gradient statistics are first loaded into an internal buffer in mini-batches, then accumulated. This reduces the overhead from frequent cache misses and improves runtime performance, particularly on large datasets.
+
+Benchmarking shows that cache-aware prefetching can double the speed of the exact greedy algorithm on datasets with millions of instances. For approximate algorithms, selecting an appropriate block size also helps balance cache usage and workload distribution. Too small a block reduces parallel efficiency; too large a block causes more cache misses. A block size of about 65,536 examples typically achieves the best trade-off.
+
+4.3 Blocks for Out-of-Core Computation
+
+When datasets are too large to fit into memory, XGBoost enables out-of-core computation by dividing the dataset into blocks stored on disk. To avoid I/O bottlenecks, the system prefetches data blocks into memory buffers using independent threads, allowing training and disk reads to overlap.
+
+Two key techniques optimise this process:
+
+Block Compression: Data is compressed by column and decompressed on the fly. This reduces disk I/O by trading off a small amount of computation. Indexes within each block are also compressed using offsets stored as 16-bit integers. This improves compression while keeping memory usage low.
+Block Sharding: When multiple disks are available, data is evenly distributed across them. Separate threads are assigned to each disk for prefetching. This maximises disk throughput and ensures the training process receives data continuously.
+Together, these techniques allow XGBoost to process hundreds of millions of examples on a single machine. They also minimise the performance gap between in-memory and out-of-core learning.
+
+5. Related Works
+XGBoost builds upon a long line of research in gradient boosting and scalable machine learning systems. This section highlights how XGBoost relates to, and improves upon, previous work.
+
+Gradient boosting, originally developed as a general technique for additive optimisation in functional space, has been successfully applied to a wide variety of tasks including classification, learning to rank, and structured prediction. XGBoost enhances this foundation by introducing a regularised objective that helps prevent overfitting. While similar ideas appear in earlier works such as Regularized Greedy Forest (RGF), XGBoost simplifies the formulation and optimises it for parallel processing.
+
+Column sampling is another effective technique used in XGBoost to reduce overfitting and improve training efficiency. It is inspired by methods from Random Forests, where features are randomly selected at each split. By incorporating this into gradient boosting, XGBoost further stabilises training and enables better generalisation, particularly on high-dimensional datasets.
+
+Sparsity-aware learning has been explored extensively in linear models, but rarely in decision tree algorithms. Most tree learners either assume dense input or require specialised procedures for handling missing values or categorical variables. XGBoost is one of the first to provide a unified and principled approach to handling all kinds of sparsity, offering both accuracy and computational efficiency.
+
+Several prior works have addressed the parallelisation of tree learning. Most of these focus on approximate methods to reduce the computational burden. Notable examples include frameworks that use histogram-based algorithms or distributed quantile summaries. XGBoost adopts a similar framework but extends it with system-level optimisations such as cache-aware learning and out-of-core computation. These features enable XGBoost to scale beyond the capabilities of earlier systems.
+
+Additionally, while many systems focus primarily on the algorithmic aspect, XGBoost provides a full end-to-end solution that tightly integrates algorithmic and systems optimisations. This includes innovations like the weighted quantile sketch, cache-aware prefetching, and block-based learning. Together, these features enable the model to run efficiently on both single machines and distributed clusters, handling datasets with billions of instances and limited memory resources.
+
+Quantile sketching itself is a well-known problem in database research, but existing methods typically do not support weighted data. The weighted quantile sketch introduced in XGBoost is, to our knowledge, the first algorithm that addresses this problem with provable guarantees. It is not specific to boosting and can benefit other areas in data science where quantile approximation with weights is required.
+
+6. End-to-End Evaluations
+This section presents empirical evaluations of XGBoost, highlighting its performance in various scenarios including single-machine learning, distributed training, and out-of-core settings. The goal is to demonstrate the effectiveness, efficiency, and scalability of the system across multiple datasets and machine configurations.
+
+6.1 System Implementation
+
+XGBoost is implemented as an open-source package that is portable and easy to integrate. It supports various objective functions for classification and ranking, including custom-defined objectives. Bindings are available for Python, R, Julia, and other popular languages, making it compatible with common data science pipelines like scikit-learn.
+
+The distributed version of XGBoost builds on top of a library called Rabit, which handles collective communication operations. It is designed to run on multiple platforms including Hadoop, MPI, and cloud-based systems. Native integrations with Spark, Flink, and cloud environments such as Alibaba’s Tianchi have also been developed.
+
+6.2 Dataset and Setup
+
+Four datasets are used in the experiments:
+
+Allstate: 10 million rows, 4,227 features. Insurance claim classification task. Evaluates the sparsity-aware algorithm.
+Higgs Boson: 10 million rows, 28 features. Binary classification task. Used to benchmark training speed and model performance.
+Yahoo! Learning to Rank Challenge: 473,000 queries, 700 features. Document ranking task.
+Criteo Terabyte Dataset: 1.7 billion rows, 67 features. Click-through rate prediction. Used to assess out-of-core and distributed performance.
+Experiments were conducted using a mix of local machines and cloud infrastructure. Single-machine experiments used a 16-core server with 64 GB RAM. Distributed experiments were run on EC2 clusters with varying node counts and resource configurations.
+
+6.3 Classification
+
+XGBoost was compared to other popular exact greedy tree boosting implementations, including scikit-learn and R’s GBM. Using the Higgs dataset, XGBoost was found to train more than 10 times faster than scikit-learn while achieving similar or better accuracy. R’s GBM was faster in some cases but delivered significantly lower accuracy due to its less exhaustive search strategy.
+
+Column subsampling was also evaluated and found to slightly reduce accuracy on the Higgs dataset, likely due to the importance of a small number of features. However, in many other scenarios, it improves generalisation by preventing overfitting.
+
+6.4 Learning to Rank
+
+On the Yahoo! learning to rank dataset, XGBoost was compared to pGBRT, a state-of-the-art system in this domain. XGBoost ran faster and achieved comparable or slightly better performance in terms of ranking metrics. Interestingly, using column subsampling improved both speed and accuracy in this task, likely by reducing overfitting on the training data.
+
+6.5 Out-of-Core Experiment
+
+To evaluate out-of-core capabilities, the Criteo dataset was used on a single AWS machine with limited memory. A basic out-of-core setup could only handle 200 million examples. By enabling block compression and sharding across two disks, XGBoost scaled to process the full dataset of 1.7 billion rows.
+
+Compression yielded a 3× speedup by reducing I/O bottlenecks, while sharding provided an additional 2× improvement. As the system exhausted its file cache, performance degraded gracefully, demonstrating the effectiveness of out-of-core techniques even under memory pressure.
+
+6.6 Distributed Experiment
+
+XGBoost’s distributed capabilities were tested on a YARN cluster of 32 EC2 nodes, each with 8 virtual cores and 30 GB RAM. Compared to production-grade distributed systems such as Spark MLlib and H2O, XGBoost was significantly faster per iteration and achieved better end-to-end performance, even when accounting for data loading times.
+
+Notably, XGBoost continued to scale smoothly as the dataset grew, thanks to its ability to switch between in-memory and out-of-core modes. While other systems suffered memory issues or long delays, XGBoost maintained consistent throughput.
+
+Further experiments with varying numbers of machines showed that XGBoost scales nearly linearly with additional nodes. Even with just four machines, it was able to train on the full 1.7 billion record dataset, confirming its resource efficiency and scalability.
+
+7. Conclusion
+This paper presented the design and implementation of XGBoost, a scalable and efficient tree boosting system that has become a widely used tool for machine learning practitioners and researchers. By addressing both algorithmic and systems-level challenges, XGBoost delivers state-of-the-art results on a broad range of tasks, from classification and ranking to large-scale industrial applications.
+
+A key contribution of this work is a novel sparsity-aware learning algorithm that efficiently handles sparse inputs common in real-world data. XGBoost also introduces a theoretically justified weighted quantile sketch method for approximate split finding, which extends the applicability of boosting to weighted datasets without sacrificing accuracy.
+
+Beyond algorithms, the paper detailed a series of system-level optimisations that make XGBoost highly scalable. These include a cache-aware block structure, out-of-core computation for memory-constrained environments, and parallel processing for both local and distributed systems. The careful integration of these techniques allows XGBoost to train models on billions of examples using modest computational resources.
+
+The end-to-end evaluations demonstrated the practical benefits of these optimisations. On diverse datasets and under various computing constraints, XGBoost consistently outperformed existing methods in both speed and predictive accuracy. It also exhibited robust scalability, handling datasets that are orders of magnitude larger than those used in typical benchmarks.
+
+Overall, XGBoost offers an efficient, scalable, and versatile framework for gradient boosting that bridges the gap between algorithmic innovation and real-world deployment. The lessons learned through its development provide useful insights that can inform the design of other high-performance machine learning systems.
+

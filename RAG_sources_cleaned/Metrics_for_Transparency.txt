@@ -1,0 +1,265 @@
+"Metrics for Transparency"
+
+Authors: Dayana Spagnuelo, Cesare Bartolini and Gabriele Lenzini
+
+
+Abstract
+Transparency is a novel non-functional requirement (NFR) for software systems. It is acclaimed to improve service quality by giving users access to information concerning system processes and clarifying accountability when failures occur. It is also considered essential to support users' rights to secure and private processing of personal data. This paper defines eight quality metrics for transparency and demonstrates their usage and effectiveness by assessing transparency in Microsoft HealthVault, an online platform for collecting, storing, and sharing medical records.
+
+Keywords: Transparency, Metrics, Non-functional requirements, Requirements Engineering, Quality factors
+
+1. Introduction
+Transparency is defined as the quality that enables users to be informed about what will happen, or what has happened, to their data. When users are concerned about how a system manages data—particularly personal data—transparency ensures an open policy about the system's functioning and information processing. It is considered a non-functional requirement (NFR) that can enhance service quality.
+
+Transparency plays a critical role in achieving privacy and data protection. While it does not guarantee confidentiality, it promotes clarity through transparent privacy policies and user-accessible mechanisms to verify whether a system operates as intended. This aligns with the foundational principles of the European General Data Protection Regulation (GDPR).
+
+Transparency can be effectively expressed as a requirement within Requirements Engineering (RE). RE offers techniques and tools to specify, model, represent, implement, measure, and track both functional and non-functional requirements. NFRs describe how a system should perform with respect to attributes like performance, usability, maintainability, and robustness. Transparency, being multi-dimensional, requires modelling approaches different from traditional NFRs.
+
+Introducing transparency into the Software Development Life Cycle (SDLC) involves modelling and validating it at various stages using different processes. This paper focuses on modelling and validation. Modelling requires a formal representation of transparency. A preliminary model has been proposed in prior work. Validation, on the other hand, involves quantifying the extent to which a system provides transparency, which is traditionally addressed using software metrics.
+
+We propose eight metrics to measure the degree of transparency in a system. Section 2 qualifies transparency in IT and reviews related literature. Section 3 presents our methodology to define and classify transparency metrics. Section 4 defines the metrics. Section 5 demonstrates their application to a real-world system. Section 6 concludes with a discussion and directions for future research.
+
+2. Related Work
+Previous work has established that transparency primarily involves two elements: (1) providing users with information—such as data or evidence—about how their personal data is or will be handled by a system, and (2) offering mechanisms—such as applications or plugins—that assist users in retrieving and presenting that information.
+
+In prior work [22], 41 requirements were introduced to define transparency. However, no methodology was proposed for validating whether these requirements had been implemented. For this purpose, non-functional requirement (NFR) metrics can offer support. Yet, not all NFRs can be easily translated into quantifiable terms [12, 24]. Defining metrics to validate software quality is a well-established research topic. The IEEE Standard 1061 [15], which provides a methodology for defining such metrics, is the foundation of this paper’s approach.
+
+Desirable features of useful metrics are discussed in [16], while the correctness of NFR-related metrics—such as those for maintainability [7], reusability [4], reliability [1], and safety [11]—can be validated through formal methods. However, none of these metrics address transparency directly.
+
+In control system design, some transparency metrics do exist. For example, a control algorithm is deemed transparent if “it is easy and clear to see what the controller does in the moment and what it will do next” [11]. While helpful in their domain, these metrics focus on input-output and graphical representations, making them unsuitable for our purposes.
+
+A potential path toward defining transparency metrics involves analysing the factors that qualify transparency. For instance, [23] discusses transparency in terms of "observability"—i.e., the visibility of different types of user-related data. In our previous work [22], this notion of observability is tied to the attribute "instrument". Although metrics were not defined in either work, they help identify the key elements that any transparency metric should address.
+
+In eGovernment contexts, transparency has been used to assess accountability and is linked to efficiency, effectiveness, and accessibility of public information [25]. One proposed metric is the “percentage of processes for which information is available to users.” Efficiency may be measured by how much time a user spends accessing a service or how long an organisation takes to produce it. Effectiveness is defined as how well user needs and expectations are met and is often estimated through the presence or absence of complaints. These are all valid inspirations, although none of them are expressed as formal, normalised metrics.
+
+3. Methodology
+This work adopts the methodology outlined in the IEEE Standard 1061 [15], which defines a five-step process for creating software quality metrics:
+
+Establish requirements
+Identify metrics
+Implement the metrics
+Analyse the results
+Validate the metrics
+Step 1—establishing transparency requirements—was completed in previous work [22]. This paper focuses on Steps 2 to 5.
+
+Transparency is inherently multi-faceted. Attempting to define a single metric for it would yield overly coarse assessments. Instead, following IEEE’s guidance, we first identify quality factors and sub-factors that contribute to transparency. We then associate each sub-factor with measurable properties, drawing from existing literature on software quality and non-functional requirements.
+
+To guide this process, we developed a questionnaire that helps determine whether specific transparency-related qualities are satisfied in a given system. Only questions with objective, measurable answers were selected for metric formulation.
+
+Identified Quality Factors and Sub-factors
+
+Based on our literature review and earlier research [5, 6, 19, 25], transparency can be operationalised through two primary factors:
+
+Providing information
+Providing mechanisms
+These are further broken down into five sub-factors:
+
+Informativeness – quality of information conveyed
+Understandability – how comprehensible the information is
+Accessibility – ease of obtaining the information or mechanism
+Validity – precision and correctness of mechanisms
+(Accessibility) – also relevant for mechanism provision, making it a shared sub-factor
+These sub-factors were selected based on their recurrence and significance in existing NFR frameworks and transparency literature.
+
+Role of the Questionnaire
+
+The questionnaire consists of detailed prompts targeting each sub-factor. Questions were formulated using definitions found in prior literature. Where necessary, high-granularity prompts were broken into sub-questions. Only those questions that admit objective evaluation were retained for metric design (highlighted in grey in the original Table 1).
+
+For instance:
+
+Questions such as "Is the system providing accurate information?" led to the accuracy metric.
+Subjective or user perception-dependent questions like "Is the information consistent with user experience?" were excluded from metric design.
+Summary of Selected Sub-factors
+
+
+4. Metrics
+We define eight metrics to assess the degree of transparency in a system. Each metric is associated with one or more sub-factors and is designed to be normalised in the range from 0 (lowest transparency) to 1 (highest transparency).
+
+Summary of Metrics
+
+Sub-factor	Metric Name
+Informativeness	Accuracy, Currentness
+Understandability	Conciseness, Detailing, Readability
+Accessibility	Availability, Portability
+Validity	Effectiveness
+4.1 The Eight Metrics
+
+1. Accuracy
+This measures how well the system’s information reflects its actual behaviour. Each statement in system documentation should be traceable to an observable system process.
+Let:
+
+LS = number of linked (verifiable) statements
+NLS = number of non-linked or unverifiable statements
+Then the accuracy is:
+Ac = LS / (LS + NLS)
+
+2. Currentness
+Measures how quickly the system updates information after an event.
+Let:
+
+Δt = actual time delay for the update
+Δtu = expected (ideal) update time window
+Then currentness is:
+Cu = 1, if Δt ≤ Δtu
+Cu = 2^(-floor(Δt / Δtu)), if Δt > Δtu
+
+3. Conciseness
+Measures syntactic simplicity using sentence length.
+Let ASL be the average sentence length. We use a Gaussian-based formula centered at 20 words per sentence (σ = 5):
+Co = exp(-1/50 * (ASL - 20)²)
+
+4. Detailing
+Assesses if key questions (what, who, why, when, etc.) are answered in the provided information.
+Let:
+
+di = number of pertinent questions answered for info i
+PDi = total number of pertinent questions for info i
+Then across all pieces of information:
+D = Σdi / ΣPDi
+
+5. Readability
+Uses the Flesch Reading Ease Score (FRES):
+Let:
+
+ASL = average sentence length
+ASW = average syllables per word
+FRES = 206.835 - (1.015 × ASL) - (84.6 × ASW)
+The normalised readability metric R is:
+
+R = 0 if FRES < 0
+R = FRES / 100 if 0 ≤ FRES ≤ 100
+R = 1 if FRES > 100
+6. Availability
+Measures ease of reaching a given tool or information.
+Let:
+
+Nint = number of user interactions required
+k = acceptable maximum steps
+ω = value assigned at k steps
+Then:
+Av = 1 - ((1 - ω)/k) × Nint, if Nint ≤ k
+Av = ω × exp(-(Nint - k)), if Nint > k
+
+7. Portability
+Assesses whether information can be used across systems or platforms. Adapted from the 5-star Open Data scheme:
+P =
+
+0 if no information available
+0.2 if available in any open format
+0.4 if structured
+0.6 if non-proprietary
+0.8 if uses URIs
+1 if based on linked data
+8. Effectiveness
+Checks whether mechanisms achieve their intended goal. Similar to the detailing metric:
+Let:
+
+ei = number of goal-oriented outputs achieved for info i
+PEi = number of relevant goals for info i
+Then across all outputs:
+E = Σei / ΣPEi
+
+4.2 Synthesis
+
+Although each metric is normalised, they measure different aspects and cannot be directly aggregated into a single transparency score. Instead, results are best visualised through a radar chart, where each axis represents a metric. This allows comparison between different systems and highlights strengths and weaknesses per transparency dimension.
+
+The metrics are designed to be generic and can be applied to any system that claims transparency. For example, in the context of the 41 transparency requirements proposed in [22], these metrics can be mapped to each requirement depending on whether it pertains to providing information or mechanisms.
+
+5. Use Case: Microsoft HealthVault
+To demonstrate the applicability of the proposed transparency metrics, we evaluate Microsoft HealthVault, an online platform for storing and sharing personal health information. HealthVault accepts data from three sources:
+
+Manually entered by the user
+Sent by compatible health applications
+Transmitted from compatible health devices (e.g., blood pressure monitors)
+We assess two transparency requirements from [22]:
+
+R1: “The system must provide users with disclosure of policies, regulations, or terms concerning data sharing, processing, and use of data.”
+R2: “The system must provide users with accountability mechanisms.”
+Evaluation of Requirement R1: Disclosure of Policies
+
+HealthVault includes a section titled "Microsoft Privacy Statement" that outlines data policies. We assess transparency using six key metrics.
+
+Accuracy
+Six core statements from the privacy policy are identified. Four are verifiable through user-accessible features. One (related to login credentials) is partially valid; another (about U.S. data reporting) does not apply in the EU.
+→ Ac = 4 / 5 = 0.8
+
+Currentness
+The site shows the last updated date and what changed but does not specify how quickly updates follow system changes.
+→ Currentness not measurable
+
+Conciseness
+Average sentence length = 17.71 words.
+Using the Gaussian formula,
+→ Co ≈ 0.90
+
+Readability
+Flesch Reading Ease Score = 36.02, which is considered fairly difficult.
+→ R ≈ 0.36
+
+Detailing
+We examine whether the privacy statement answers:
+
+Is data shared? With whom? For what purpose?
+Is data processed? For what purpose?
+How is data used? For what purpose?
+All relevant answers are found across six policy sections.
+→ D = 1
+
+Availability
+With k = 3 and ω = 0.7, users need only 1 interaction to access the privacy section.
+→ Av = 0.9
+
+Portability
+Policy is in HTML (open, structured, non-proprietary), accessible via URL. It does not use linked data.
+→ P = 0.8
+
+Evaluation of Requirement R2: Accountability Mechanisms
+
+HealthVault includes a “Record History” section that lets users track:
+
+What actions occurred
+Who performed them
+When they occurred
+Which applications were involved
+Availability
+The feature is accessible in 1 click from the main page (assuming login).
+→ Av = 0.9
+
+Effectiveness
+Among the four intended goals (what, who, when, why), three are fulfilled. Purpose is not clearly stated.
+→ E = 3 / 4 = 0.75
+
+Summary
+
+A radar chart (Figure 2 in the original paper) illustrates the transparency metrics:
+
+Blue: R1 (Information Disclosure)
+Orange: R2 (Accountability Mechanisms)
+Currentness is omitted as it was not measurable. Overall, Microsoft HealthVault demonstrates strong transparency in areas like detailing, accuracy, conciseness, and availability, while leaving room for improvement in readability and effectiveness.
+
+6. Discussion and Conclusion
+Non-functional requirements (NFRs) are essential for evaluating and comparing systems that provide similar functionality. By highlighting system attributes such as usability, maintainability, and—in this case—transparency, NFRs help determine which systems best fulfil user expectations and regulatory needs.
+
+Transparency has emerged as a key NFR due to growing public concern over privacy and the handling of personal data. In a digital world where mobile apps and cloud services permeate daily life, users are entitled to understand what happens to their data—what is collected, who accesses it, and for what purposes.
+
+Transparent systems foster trust by offering insights into internal processes, enhancing accountability, and demonstrating commitment to ethical data handling. Transparency is also becoming a competitive advantage, as services that openly communicate their data policies and mechanisms can distinguish themselves in the market.
+
+However, designing for transparency introduces several challenges:
+
+Providing meaningful information without exposing security vulnerabilities.
+Ensuring users with diverse technical backgrounds can understand the content.
+Avoiding information overload or ambiguity.
+These issues necessitate that transparency be approached as a structured, measurable quality, rather than a vague design goal. This work demonstrates that transparency:
+
+Can be broken down into measurable sub-factors.
+Can be benchmarked using well-defined, normalised metrics.
+Can be evaluated across both information and mechanism dimensions.
+The proposed metrics—accuracy, currentness, conciseness, detailing, readability, availability, portability, and effectiveness—provide a practical means to assess and compare transparency in software systems. When visualised (e.g., using radar charts), they offer clear insights into which aspects are well addressed and which require further attention.
+
+While these metrics are applicable and useful, they are not exhaustive. There is room to refine them and expand the framework. Several future research directions are proposed:
+
+Cross-domain evaluation: Apply the metrics to systems in different sectors (e.g., healthcare, finance, public administration) to identify which sub-factors are most critical in each domain.
+In-depth provider collaboration: Evaluate systems with access to internal documentation and development workflows to assess transparency from both external and internal perspectives.
+Asymmetry analysis: Investigate discrepancies between what providers disclose and what users understand—an area often overlooked despite its impact on effective transparency.
+SDLC integration: Adapt software development processes to incorporate transparency as a requirement from the outset, ensuring that it is considered throughout the design lifecycle.
+In summary, this work contributes a structured methodology to operationalise and measure transparency. It supports developers, researchers, and policymakers in building systems that respect user rights and promote trust through clear, measurable transparency practices.

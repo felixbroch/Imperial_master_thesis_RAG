@@ -1,0 +1,265 @@
+"Dynamic pricing of airline offers"
+
+Authors: Thomas Fiig, Remy Le Guen and Mathilde Gauchet
+
+
+Abstract
+
+Airlines have started to focus on expanding their product offerings beyond flights to include ancillary products such as baggage, advance seat reservations, meals, and flexibility options, as well as third-party content like parking and insurance. Today, however, offer creation is rudimentary, managed in separate processes, organisations, and IT systems. The current approach is inadequate, and the key to profitability is to manage offers consistently in an integrated Offer Management System (OMS). Realising this vision requires significant advancements in pricing science and distribution. Since the entire scope of an OMS cannot be covered in a single paper, this study focuses on one of its most critical components: the dynamic pricing of airline offers. The paper also discusses various industry initiatives that will enable the deployment of dynamic pricing, whether for the flight product alone or for the broader OMS.
+
+Keywords: Revenue Management System, Offer Management System, Dynamic Pricing, Ancillary Price Optimisation, Machine Learning, Distribution, NDC
+
+Introduction and Motivation
+
+Profitability is challenging in the airline industry. An IATA economic briefing concluded that the return on invested capital for airlines was the lowest among 30 industries studied. To improve profitability, airlines have started to expand their product offerings beyond flights to include ancillary products such as baggage, advance seat reservations, meals, flexibility options, and third-party content. However, offer construction remains rudimentary. The flight product is carefully priced using Revenue Management Systems (RMS), which have benefitted from decades of development. Yet, little to no attention is typically given to how ancillary products are selected or priced. Today, this is handled by two distinct processes—RMS and merchandising—managed by separate organisations and different IT systems.
+
+RMS is responsible for optimising revenue from the flight product alone, while merchandising is responsible for expanding the shopping basket through upsell, cross-sell, and the sale of ancillary products. There is also limited attention paid to personalising and making offers more relevant to individual customers.
+
+The current approach is inadequate. The key to profitability is to manage offers consistently within an integrated Offer Management System (OMS). This is not feasible today due to the limitations of legacy IT systems. These systems delegate control of offer creation to content aggregators, such as global distribution systems (GDS), which build itineraries and price them based on filed fares and fare rules. This means that airlines lack visibility into customer identity and have limited control over offer construction.
+
+These limitations prevent the airline industry from adopting modern e-commerce practices and benefiting from their full potential.
+
+1. Description and Limitations of Existing RMS
+Incorrect view and valuation of the flight product
+
+In a typical shopping session, availability and pricing decisions are made for flights only. Ancillary product value is ignored.
+Even for flights alone, precise valuation would require continuous pricing, which is not feasible with the current 26-letter Reservation Booking Designator (RBD)-based inventory logic.
+The net revenue the airline receives from selling a flight product is uncertain, as multiple fare products with different prices may be filed within the same RBD.
+There is similar uncertainty for interline itineraries, whose value is prorated among interline partners based on special prorate agreements (SPAs). RMS ignores the complexity of SPAs and relies on approximations.
+Incorrect view of demand and willingness to pay
+
+Demand forecasting and pricing work in different dimensions, leading to errors in estimating demand and willingness to pay (WTP):
+RMS forecasting uses traffic flow, point of sale, and booking class dimensions to control flight resources.
+Pricing departments focus on differentiating customers' WTP through rules and restrictions such as eligibility, return requirements, minimum/maximum stay durations, stopovers, weekend stay conditions, advance purchase requirements, and fare combinability.
+No optimisation of the total product offer
+
+The set of products an airline sells is not optimised or priced together, but treated independently.
+No personalisation or merchandising
+
+All customers are shown the same price for the same product.
+The sales display cannot be tailored in a way that influences individual purchasing behaviour.
+
+2. Contribution
+This paper outlines a vision for a modern Offer Management System (OMS) and explores how to overcome the limitations of current airline pricing practices. Given the broad scope of an OMS, the focus here is on one of its most critical components: dynamic pricing of airline offers. Additionally, it discusses how shifts in the distribution landscape—particularly through initiatives like IATA’s New Distribution Capability (NDC)—will support the deployment of dynamic pricing and the broader OMS. To the authors' knowledge, no prior published work addresses these questions or implements dynamic pricing for airline offers.
+
+The Offer Management System
+Description of an Offer
+
+In line with IATA's definition, an offer is a proposal by an airline to a customer for a specific set of products—flights and/or ancillary services—in response to a shopping request from a seller or an aggregator. These shopping requests can be personalised (with traveller data) or anonymous. Based on the traveller information, the response may also be customised.
+
+Offers cannot be altered or mixed with other offers. Each comes with its own set of rules, such as validity, payment deadlines, and inventory guarantees. An offer is composed of one or more offer items, each of which includes a set of products and a price, bundled as a unit. Offer items may be mandatory or optional, and the final offer price is calculated based on the selected items.
+
+Terminology used includes:
+
+Product offer: the set of products proposed in an offer.
+Price offer: the set of associated prices for those products.
+Dynamic offer construction: the online process that determines the product offer.
+Dynamic pricing: the process that determines the price offer.
+Before discussing the complexities of pricing an offer dynamically, the paper first considers the general composition of a product offer.
+
+3. Product Set of the Airline Offer
+An airline offer typically consists of both mandatory and optional offer items. These items can be customised by the customer during the shopping process. The offer elements include:
+
+3.1 Flight products: These are fare families (e.g. economy, premium economy, business) which may include bundled services like seat selection, in-flight privileges, and other conditions or restrictions.
+3.2 Hotel rooms: These include airline-owned or third-party hotel offerings, structured across consecutive days (e.g. Day 1 and Day 2), with options like "sea view" or "street view".
+3.3 Interline flight connections: These are flights operated in collaboration with partner airlines.
+3.4 Base product: The mandatory core of the offer, consisting of a selected flight (from one fare family) and possibly a hotel stay.
+3.5 Bundles of ancillaries: Optional service packages targeted at specific segments. Examples include baggage packs (carry-on, first bag, second bag), flexibility packs (unlimited changes, name change, itinerary modifications), or comfort packs (priority boarding, seat preferences).
+3.6 À la carte ancillaries: Optional single-item add-ons such as fare locks, cancellation protection, fast track access, or priority boarding.
+3.7 Third-party content: Optional non-airline extras such as insurance, parking, hotel stays, and car rentals.
+4. Description of an Offer Management System (OMS)
+4.1 Vision
+
+The Offer Management System is built on two foundational principles:
+
+4.1.1 Dynamic offer construction and pricing: The system generates offers tailored to individual customers using both behavioural and contextual information.
+4.1.2 Channel consistency: Offers are presented uniformly across distribution platforms and centrally managed by the airline, ensuring accurate content and maintaining control.
+This detailed and personalised approach helps airlines increase revenue performance while improving the customer experience. It also supports transparency by eliminating inconsistent pricing and content presentation across channels.
+
+5. Core Components of the OMS
+The OMS integrates five key modules that operate together to respond to shopping requests and generate customised offers:
+
+5.1 Content Management
+
+Maintains the product catalogue of everything the airline can sell—both bundled and à la carte.
+During a shopping session, this module dynamically selects items from the catalogue to create a tailored product offer.
+5.2 Customer Segmentation
+
+Groups customers based on shared attributes such as lifestyle, preferences, past behaviour, or demographics.
+Also handles anonymous users by inferring intent from the shopping context.
+Segmentation is done offline and shared with systems responsible for user experience and customer service.
+5.3 Dynamic Offer Construction
+
+Recommends the most relevant product combinations to maximise customer conversion.
+Relies on recommender systems trained offline and deployed online.
+Responsibilities include:
+5.3.1 Product ranking: Sorts catalogue items based on individual relevance.
+5.3.2 Bundling: Groups products into offers that make sense for the user.
+5.3.3 Upsell and cross-sell: Promotes additional services during or after the shopping flow.
+5.3.4 Notifications: Sends proactive suggestions through digital channels like email or mobile apps.
+5.4 Dynamic Pricing
+
+Assigns prices to the constructed offer in real time.
+This critical module is explored in detail in the following section.
+5.5 Merchandising
+
+Enhances offer appeal using behavioural economics techniques.
+These include:
+Framing: Presenting offers in persuasive ways.
+Priming: Highlighting specific features to steer attention.
+Defaults: Pre-selecting options to influence decisions.
+Decoys: Introducing inferior alternatives to guide choices.
+Positioning: Controlling the order in which options appear.
+The goal is to influence customer decisions beyond pure pricing logic.
+
+6. Scientific Challenges of Offer Pricing
+Airlines have long relied on Revenue Management Systems (RMS) to price flight products, optimising only flight fares using pre-filed data. However, pricing an entire offer — including ancillaries and third-party content — requires more advanced and flexible methodologies. The Offer Management System (OMS) introduces new challenges that RMS was never designed to address.
+
+6.1 Key Differences Between RMS and OMS
+
+OMS manages both offer construction and pricing, whereas RMS focuses solely on pricing pre-defined flight fares.
+OMS enables personalised pricing and product selection at an individual level, unlike RMS, which applies the same price to all customers under similar conditions.
+These differences give rise to several scientific challenges in three categories: mature (solved), emergent (under exploration), and immature (unsolved).
+
+6.2 Mature (Solved) Challenges
+6.2.1 Single resources: The foundational RMS problem of pricing single-leg flights was solved as early as 1972 (e.g. Littlewood’s Rule), and has since evolved into more dynamic and complex forms.
+6.2.2 Multiple resources: Network RMS systems can optimise bundles of interrelated resources, such as connecting flights or hotel stays.
+6.2.3 Fare families: Correlated prices across fare types are managed using fare adjustment models that optimise jointly.
+6.2.4 Mixed resources: Vacation packages or other combinations (flight + hotel) are handled by extending traditional bid price control mechanisms.
+6.2.5 Third-party content: Complexities related to pricing interline flights or external services like insurance can be treated as variable costs within the offer structure.
+6.3 Emergent (Under Development) Challenges
+6.3.1 Dynamic pricing of flight products: Rather than relying on static prices, airlines can optimise prices in real time based on contextual and customer-specific information. Early simulation studies show strong potential.
+6.3.2 Sparse data in demand forecasting: With increased product variety and granularity, data becomes sparse and hard to use for reliable predictions.
+6.3.3 Inconsistent dimensions in forecasting vs. pricing: Pricing teams use different segmentation dimensions than those in demand forecasting, causing misalignment.
+6.3.4 Customer choice models: Discrete choice models can simulate how individuals make purchasing decisions, providing richer insights than traditional forecasting.
+6.3.5 Dynamic pricing of ancillaries: Ancillary products (e.g. baggage, seat selection) are rarely dynamically priced. New techniques allow real-time optimisation based on demand, price sensitivity, and context.
+6.4 Immature (Unsolved) Challenges
+6.4.1 Mixed bundles: Products offered both individually and in bundles (e.g. separate baggage fees vs. baggage packs) require consistent pricing logic to avoid arbitrage or confusion — a problem with no general solution.
+6.4.2 Correlated reservation prices: When customer willingness to pay for one product influences another, prices must be set jointly. This is challenging as complexity increases with additional ancillaries.
+6.4.3 Pricing ticket options: Fare locks or time-to-think options resemble financial derivatives but require pricing methods tailored to human behaviour rather than financial models.
+6.4.4 Psychological factors: Merchandising tactics such as framing or anchoring affect consumer behaviour, yet remain difficult to rigorously quantify or integrate into pricing algorithms.
+
+7.3 Dynamic Pricing of Ancillary Products
+Ancillaries (e.g. baggage, seat upgrades) are often assumed to have unlimited supply. This assumption means opportunity cost is zero, removing the need for capacity-related forecasting.
+
+7.3.1 Attribute-Rich Modelling
+
+With no forecasting constraints, dynamic pricing of ancillaries can draw from a wider range of customer and contextual attributes, such as:
+
+Point of sale, booking time, flight duration
+Fare product, number in party, weather at destination
+Holidays and special events
+Customer segment or persona
+7.3.2 Machine Learning and Price Experimentation
+
+Instead of estimating price elasticity via traditional models, the process uses A/B testing combined with machine learning (ML). This allows high-dimensional attribute sets without manual feature engineering.
+
+Example: Ancillary Price Optimisation (APO) by Navitaire
+Configure experiments: Define test prices, split traffic between control and test groups.
+Run experiments: Record outcomes across price points.
+Analyse and model: Use ML (e.g., decision trees, random forests) to identify price-sensitive attributes.
+Deploy model: Apply model in production, continuously refine through further experimentation.
+Monitor performance: Track revenue uplift and customer behaviour for ongoing optimisation.
+Results have shown double-digit percentage revenue uplift compared to static pricing strategies.
+
+8. Distribution Landscape in Motion
+Implementing dynamic pricing in the airline industry is significantly constrained by the complexity and volume of global travel distribution. Today, Global Distribution Systems (GDSs) manage vast amounts of transaction data, typically for simpler, more standardised offers. In this section, the paper outlines current industry efforts and describes how various distribution channels influence the deployment of an Offer Management System (OMS).
+
+8.1 Industry Initiatives Enabling Dynamic Pricing
+The New Distribution Capability (NDC), spearheaded by IATA, is designed to modernise airline retailing by:
+
+Reducing integration costs between airlines and third-party sellers
+Giving airlines full control over offer generation, pricing, and customer-specific data
+Eliminating the need for fare filing and precomputed availability, which have dominated for decades
+More than 40 airlines are now NDC-capable at Level 3, with over 30 IT providers supporting these capabilities. However, adoption is still limited and mostly focused on direct connects with select distribution partners (e.g., OTAs, TMCs).
+
+In parallel, ATPCO has introduced the concept of a Dynamic Pricing Engine (DPE), which reuses legacy systems while layering price adjustments on top. Pilot testing is underway to accelerate deployment timelines relative to full NDC/OMS implementations.
+
+8.2 Distribution Channels and OMS Interactions
+The paper identifies four key distribution ecosystems and their relationship to the airline’s OMS:
+
+8.2.1 Direct Channels
+
+Airlines’ websites and mobile applications are directly integrated with the OMS. This enables:
+
+Full control over the offer content and presentation
+Application of retailing techniques (e.g., merchandising, personalisation)
+Improved brand consistency and customer loyalty
+8.2.2 Gatekeepers (e.g., Google, Amazon, Facebook, Apple)
+
+Most travellers begin their search through these platforms. Airlines must engage with them using targeted advertisements or referral agreements, which requires:
+
+Pre-packaged, relevant, and appealing offers from the OMS
+Offer formats optimised for digital marketing, not traditional shopping
+8.2.3 Meta-Search Engines (e.g., Kayak, Momondo)
+
+These platforms allow customers to compare offers across providers but impose:
+
+High stress on real-time offer construction and pricing systems
+Risks of drop-off during redirection to airline sites
+Meta-booking solutions are emerging to allow booking without leaving the meta-search interface.
+
+8.2.4 Third-Party Retailers (e.g., OTAs, Travel Agencies)
+
+These agents dominate bookings on full-service carriers. They typically rely on GDSs for content aggregation but are starting to adopt direct NDC connections.
+
+These platforms often control which offers are shown to users, based on commercial incentives. Thus, airlines must optimise offers not only for customers but also for intermediary prioritisation algorithms.
+
+8.3 Technological Requirements for Scaling
+To manage the massive scale and real-time requirements of modern distribution, airlines must adopt cloud-based architectures. These systems allow:
+
+Replication of OMS algorithms and content in real-time
+High-speed response to customer queries regardless of location
+Global consistency and reliability
+Cloud infrastructure also supports:
+
+Seamless data synchronisation
+Strong security protocols
+Automated scaling and cost optimisation
+These capabilities ensure that dynamic pricing and offer construction remain feasible even under immense load from global distribution partners.
+
+9. Future Research Directions
+While many of the pricing challenges in airline Offer Management have been addressed using traditional models, some remain unresolved. The authors highlight machine learning (ML) as a transformative tool for tackling these complex issues, particularly when conventional modelling approaches fall short.
+
+9.1 Applying ML in Dynamic Pricing
+Building on the methodology outlined in the Ancillary Price Optimization (APO) case, the paper suggests that ML can be extended to:
+
+Mixed bundles: ML could help manage pricing when the same product appears in multiple offers (e.g., a carry-on bag offered both a la carte and in a bundle), ensuring internal pricing consistency.
+Correlated reservation prices: ML models could uncover and quantify relationships between customer valuations of different products, allowing for simultaneous optimisation of interdependent prices.
+Psychological factors: While difficult to model mathematically, ML can detect patterns in customer response to merchandising techniques like framing, decoys, and priming — paving the way for behavioural-aware dynamic pricing.
+9.2 Experimentation and Feedback Loops
+The authors advocate for a continuous feedback loop driven by experimentation:
+
+New pricing strategies can be A/B tested in production.
+ML models are trained using real customer data and adjusted regularly based on performance.
+This cycle enables rapid learning and refinement of pricing decisions in live environments.
+Such an approach aligns pricing strategies with key performance indicators (KPIs) like conversion rate and revenue uplift — a notable shift from the static methods used historically.
+
+10.1 Limitations of Legacy Systems
+Legacy systems lack the flexibility to:
+
+Dynamically personalise offers based on customer data and contextual signals.
+Coordinate pricing across different products (base fares, ancillaries, third-party services).
+Integrate merchandising strategies that affect customer behaviour.
+Without these capabilities, airlines are unable to fully leverage digital tools and behavioural data to optimise revenue.
+
+10.2 Benefits of Dynamic Pricing and OMS
+The paper details how a robust OMS — equipped with modules for content management, customer segmentation, offer construction, dynamic pricing, and merchandising — can:
+
+Enable personalised pricing and bundling at scale.
+Optimise both flight and ancillary offers within each shopping session.
+React in real-time to customer signals and market conditions.
+Dynamic pricing, supported by discrete choice models and machine learning, is shown to deliver significant revenue uplift over static pricing.
+
+10.3 Preparing for Industry Transformation
+With the rise of IATA’s New Distribution Capability (NDC), the distribution landscape is shifting. Airlines can now regain control over the offer process, engage directly with customers, and implement pricing strategies that reflect individual willingness to pay.
+
+Technological innovations like cloud infrastructure and real-time data replication are enabling the scalability and responsiveness required for next-generation OMS.
+
+10.4 Final Remarks
+The authors conclude that dynamic pricing of airline offers is both technically feasible and commercially necessary. While challenges remain — especially in pricing consistency, bundle optimisation, and modelling human behaviour — ongoing research and experimentation offer a promising path forward.
+
+They call for further work in applying machine learning to these open problems, with the goal of fully integrating dynamic pricing into scalable, responsive, and customer-centric OMS frameworks.
+
+
+

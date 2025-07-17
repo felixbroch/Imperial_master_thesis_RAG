@@ -1,0 +1,310 @@
+Dynamic Pricing Made Accessible:
+A dashboard which provides optimal price recommendations through a transparent and seamless process
+
+Supervisor:	Professor Pierre Pinson						
+Author: Felix Brochier
+
+Abstract
+
+This paper studies the opportunities and challenges around the implementation of dynamic pricing in the retail sector. Despite wide adoption in industries such as airlines and hospitality, retail remains resistant to its widespread adoption. The increasing availability of data allows the development of complex dynamic pricing models which adjust in real time. This complexity however makes these models hard to grasp for the average retailer, thus creating a barrier to wide adoption. 
+
+The objective of this paper is to develop a solution that will make dynamic pricing transparent in its decision making and accessible to everyone. Using a demand-based dynamic pricing model, our aim is for retailers to optimise their pricing strategies along changes in market demand. The solution described in this paper involves a dashboard offering visualisation and explanation tools. This tool attempts to explain the logic behind the pricing strategy made by our model to predict market demand. The  implementation challenges, model transparency, as well as the customer trust in the implications of dynamic pricing are finally discussed. 
+1	Introduction
+1.1	Objective
+
+The objective of this paper is to develop a demand-based dynamic pricing model which gives an optimal price recommendation. The pricing model should be understandable by the user and transparent in its process, all in a seamless and frictionless journey.
+The source code of the solution presented in this paper is available on GitHub.
+
+1.2	Dynamic Pricing
+
+Dynamic pricing is the process of adapting the price of a product to real time external conditions. It allows businesses to optimise their pricing strategies by responding to changes in customer demand, stock inventories or competition. Companies can have different objectives in their pricing strategies, such as increasing revenues, increasing sales margin or decreasing costs in inventories.
+
+Dynamic pricing has been the common way of selling goods for centuries before the invention of the price tag. Indeed, merchants would adapt the price of the goods they sold according to customer demand. Their choice of price relied on various factors such as the weather conditions or the types of customers buying (e.g. whether they were a foreigner or a local). By tailoring prices to specific circumstances, merchants aimed to maximise their profits. Nowadays, businesses are using data analytics to refine their operations, including their pricing strategies. When executed effectively, dynamic pricing adjusts prices in accordance with demand and external conditions, thus maximising revenue.
+
+The airline industry, for example, has been using dynamic pricing for over 40 years (Fiig et al., 2018) to adapt to customer demand. This enabled them to maximise their sales margin when the demand was high and optimise available slots when demand was low.
+
+Furthermore, the consulting firm McKinsey highlights that if implemented properly, dynamic pricing can help companies’ revenue increase by up to 5% and margins by up to 10%.
+
+1.3	Dynamic Pricing in Retail
+
+Following its success in highly competitive sectors (e.g. hospitality), dynamic pricing is now being adopted in other fields including retail. With rising inflation, retailers need to remain competitive. This is particularly true for online retailers, as pricing is an even more important deciding factor for them.
+
+Food prices rose at the fastest rates in 13 years because of high inflation, which also created high volatility in prices. Supermarkets change their prices very frequently to optimise their revenues in tough economic conditions.
+
+Improvements in artificial intelligence has made dynamic pricing models easily accessible for online retailers. This is because of the development of predictive modelling and the access to abundant data through tracking, caused by lockdowns which had consumers buy more online. Tough economic conditions and volatile prices have made consumers used to changes in prices, leading the way to the development of dynamic pricing tools.
+
+Dynamic pricing in retail is appealing for several reasons. First, it is able to adapt to market demand and sell products at the highest price customers are willing to pay. Secondly, it allows retailers to have efficient inventory management by having them adjust their prices based on surplus or scarcity of stock. Finally, dynamic pricing can boost customer satisfaction and trust through fair prices aligned with market conditions.
+
+Nevertheless, dynamic pricing, especially in retail is facing significant criticism, as some consumers find it unfair (Garbarino & Lee, 2003) to change prices for different conditions. For instance, car-service apps created a surge in price with their drivers in New York City during peak hours. This led to legal prosecutions by regulators to avoid such excess. Dynamic pricing can also have severe consequences for the company if it is misused. This can lead to a decrease of sales or brand reputation. This is especially true with various website or navigation add-ons emerging to alert customers of price changes (e.g. Honey)
+
+Industry leaders like JD (JD Corporate Administrator, 2021) and Amazon make use of sophisticated dynamic pricing mechanisms, demonstrating the growing interest in this new innovation. For instance, Amazon reported an increase in its profits by 25% by changing prices as frequently as 2.5 million times a day. Currently, approximately 25-30% of European retailers use dynamic pricing. Dynamic pricing therefore has a growing recognition of adapting swiftly to market changes and providing demonstrated added value.
+
+
+
+1.4	Multiple Dynamic Pricing Methods
+1.4.1	Types of Dynamic Pricing
+
+Dynamic pricing in retail can be implemented using some of the following methods:
+
+Segmented Pricing: Retailers adapt their prices to the customer visiting their website. This method is also called price discrimination.
+Time-Based Pricing: Retailers determine the price of a product according to a demand associated with a specific moment in time (train departure for example).
+Peak Pricing: Prices increase when the demand of a product increases.
+Penetration Pricing: Retailers typically use this method when they want to enter a market or launch a new product. This strategy sets prices lower than their competitors to attract customers and build product popularity. Retailers then usually increase their price as the product gains traction and popularity.
+Competitive Pricing: Retailers set their prices according to the market standards.
+Bulk Pricing: Retailers adapt their prices according to the number of articles the customer buys.
+
+Dynamic pricing strategies have three levels of complexity: The first level is operating independently from external market conditions (Bulk or Segmented Pricing). The second level is rule-based, which means these strategies react to specific market conditions (Time-based, Competitive, and Penetration pricing). The most complex level is predictive (Peak Pricing), which attempts to forecast changes in market demand.
+
+Although simple dynamic pricing methods can already significantly impact sales, today’s competitive retail environment often necessitates predictive and more complex capabilities. By using artificial intelligence and historical data, these models can anticipate market fluctuations.
+
+1.4.2	Solutions to Implement Dynamic Pricing
+
+Companies looking to develop complex dynamic pricing tools have three main options, discussed below.
+
+Firstly, they can hire a team of data scientists internally in charge of developing business analytics tools such as dynamic pricing. This option can be costly and challenging, especially if the retailer has no experience in the field. It is usually complicated to manage a team when one does not understand what it is doing.
+
+Secondly, retailers can hire specialised consultants to implement these tools, which usually involve a significant engagement (in terms of time and investment). The retailer has however less control over the project since it is managed by an external party.
+
+Finally, companies can use platforms which provide dynamic pricing solutions such as Reactev, Symson, and Competera. These platforms provide businesses with user-friendly dashboards to manage different pricing strategies, focusing mainly on stock and competitor-based pricing. These tools however do not provide demand-based dynamic pricing solutions, which have been mentioned previously as the most important method today. Another dynamic pricing tool worth studying is the Amazon Seller platform, where businesses using Amazon as a marketplace can leverage Amazon’s algorithm to adjust prices based on inventory levels. Amazon Seller benefits from its extensive data and market expertise, though retailers are limited in differentiation in the marketplace as all users have easily access to the same tool.
+
+2	Problem Definition
+2.1	Framing the Problem
+
+From the dynamic pricing methods mentioned in 1.4.1, we have narrowed our focus to the two most popular dynamic pricing methods, competitor based and demand-based.
+
+The competitor-based pricing method adjusts prices in response to competitors altering theirs to ensure sales are not lost. This approach is important for retailers who aim to maintain their market position. This method however only reacts to market changes.
+
+The demand-based pricing method adjusts prices to effectively balance supply and demand. The effectiveness of this approach can vary significantly, especially in competitive markets. For instance, if a retailer raises its price due to an increase in demand, consumers might choose to buy from competitors who have lower prices, especially if the differences between the products are negligible. Demand-based pricing is most effective in two specific scenarios. When the retailer holds a monopolistic position (in transportation industries for instance) or when the product’s value is perceived independently of competitor offerings. This is often the case with discounts, where the customer does not focus on the product’s price compared to competitors but on the new product’s price compared to the previous one.
+
+In this paper, we focus on demand-based rather than competitor-based dynamic pricing. This is because there are numerous price scraping tools today which enable competitor-based dynamic pricing, such as Price Runner or Octoparse. These tools are easy to use while demand-based has limited accessible tools.
+
+2.2	Problem Outline
+
+Looking at demand-based dynamic pricing, we delved into the different methods for retailers to implement these kinds of tools to their pricing strategies. Two categories of solutions can be distinguished.
+
+The first, more end-to-end approach, involves hiring a team of experts in dynamic pricing. This method, while potentially highly effective, is also time-consuming and costly to implement. It often takes several months to fully integrate the solution. Retailers must place considerable trust in the chosen team, especially if they do not fully understand the complexities of dynamic pricing. Given the critical nature of pricing decisions, the risk involved may stop companies from investing in a tool that is expensive and potentially disruptive to their existing operations. This solution is however not accessible for most retailers, as they cannot hire a team of experts to simply test and understand the intricacies behind dynamic pricing.
+
+Dynamic pricing platforms mentioned in 1.4.2 are therefore getting increasingly popular. They provide complex algorithms and strategies while remaining intuitive to use. Even if they are faster to set up, the process is still tedious (typically involves arranging a demo, providing company details and submitting sensible data about the company). Moreover, these platforms often use “black box” algorithms where the user has no explanation on how this price is calculated, where it comes from or the assumptions it is based upon. As a result, retailers must heavily rely on the platform's credibility which is another significant barrier to entry and an important risk if the tool does not perform as expected.
+
+If companies want to adapt to market demand and adjust their prices accordingly, no tools currently allow them to do this in a few clicks. They need to go through lengthy processes to implement dynamic pricing. Moreover, even if they had access to these tools, they have no explanation or understanding of how the optimal price is found. Retailers need to have full trust in a 3rd party to benefit from dynamic pricing strategies.
+
+3	Solution Outline and Objectives
+
+Having identified the issues, the solution presented in this paper will try to help users get into dynamic pricing while avoiding lengthy processes and trust in a 3rd party. We will focus on two objectives, reducing customer friction and making the process more transparent.
+
+3.1	Customer Friction
+
+Customer friction relates to the points of resistance that make the customer journey seamless from a customer’s point of view. This entails removing unnecessary steps before actually using the product, minimising complexity in the process. 
+
+A well-designed user journey is critical for a positive experience. A smooth user journey can increase customer’s willingness to share personal data by 63%. Additionally, nearly 80% of American consumers have identified efficiency, speed, and convenience as the most crucial elements of a satisfying customer experience.
+
+The goal is therefore to create a platform which provides access to dynamic pricing with lower customer friction than what is currently available on the market. The presented solution will be assessed by comparing it to alternatives on the market such as Amazon Seller, Reactev, Symson and Competera. 
+
+We will validate this objective by creating a customer journey mapping for our solution and for other current solutions, highlighting all touchpoints and interactions to identify differences in customer experience. We will also look at the common points of friction in the user journey and make sure the provided solution avoids these pitfalls while comparing it to other solutions.
+
+Although gathering user feedback and measuring overall satisfaction is crucial, the inability to access other platforms may pose a challenge in directly comparing user experiences. However, we aim to mitigate this limitation by focusing on the validation of our solution through established criteria and interacting with professionals.
+
+3.2	Transparency
+
+In a business context, transparency refers to the practice of being open, honest, and straightforward about various aspects of a company's operations. This includes sharing details about performance, revenue, internal processes, sourcing, pricing, and business values. In the specific area of dynamic pricing, transparency means being clear about how optimal prices are calculated, detailing each step of the process and underlying assumptions.
+
+Being able to understand the technology employed is crucial to effectively implement and benefit from technological advancements. According to the Technology Acceptance Model, a tool that is perceived as easy to use is more likely to be adopted. Furthermore, the likelihood of technology adoption increases if users trust the technology. This has been shown during the adoption of e-wallet services.
+
+Finally, process transparency enables ‘perceived usefulness’. This is the degree to which a customer believes that using the system will enhance their performance. Being transparent in the process is therefore beneficial for it to be adopted and used by potential customers.
+
+We will evaluate and compare the transparency of the presented solution to current solutions in this report using the “Metrics of Transparency” (Spagnuelo et al., 2017).
+
+4	Solution Definition
+4.1	Presentation
+
+The solution presented below is designed to help companies explore and understand dynamic pricing in a transparent and user-friendly manner. This solution is encapsulated in a dashboard where users upload their own data. After the user has defined the external conditions in which they want to find the optimal price, the dashboard then provides a suggestion based on the parameters chosen by the user and their data. If they do not want to upload their data, a mock dataset is made available to them.
+
+The dashboard visually explains the reasoning behind its conclusions to make it more understandable to the user. It incorporates visualisation tools, explaining how the suggested price is found, the predictive model it relies upon and the price elasticity function employed in the model. This approach ensures users can easily understand how dynamic pricing works and trust the relevance of the price recommendations.
+
+4.2	Methodology
+
+The platform works as follow.
+
+The user first input their company data. The minimum required parameters are the date, the number of sales per day (which we will refer to as the demand for the product) and the price at which the product was purchased. Other parameters to be input could include the time of the purchase, the review of the product, the outside temperature, if the client is a recurring one etc. The user is free to upload any external parameters, as they can help the model establish correlations with the demand.
+
+Throughout this report, we will refer to all external parameters (such as date and any additional parameters the user wishes the model to learn from) as X-p, the price parameter as Xp and the demand as D. The dataset is input into a XGBoost model, which takes Xp and X-p as input and outputs D.
+
+After the model is adequately trained, the user specifies the external parameters in which they want to calculate the optimal price. These parameters should match the ones entered into the XGBoost model. The user then sets a minimum and maximum price range for the product. The platform then iterates through each price and calculates the predicted demand using the external parameters defined at each price point. This produces a demand-to-price function. Each calculated demand is then multiplied by its corresponding price to generate a revenue-to-price function. The optimal price is defined as the price within this function that maximises the revenue.
+
+For the recommendation of the optimal price, other parameters such as the sales margin have been considered, even though it is not really the main concerned of online retailers. Moreover, sales or net margin, which are important criteria to be considered can be calculated only if the client inputs the COGS (Cost of Goods Sold) of the product in his dataset. This is an extra step the user may not be inclined to do. Our aim being the reduction of customer friction, it is therefore important to minimise the number of parameters necessary to have a working dynamic pricing tool. Finally, the most common way to increase net margins is to increase revenues. Consequently, it has been decided to focus on the revenues of a company throughout this project.
+
+During the price iteration process, the model defines a demand-to-price function, which measures the elasticity of customer demand relative to price changes. This function can only be accurately calculated if the model has prior data on how price changes affect demand. For companies that don’t vary their prices or offered discounts, it is impossible to rely on historical data to predict how price will impact demand. Therefore, in scenarios where little or no price variation data exists, a standard linear demand-to-price function is implemented. We have considered more than 80% of the data with a single price the threshold when there is not enough price variations data. This allows users to test the dynamic pricing tool, even if they don’t have the necessary data for an optimal price recommendation. As the customer uses the platform and varies their prices, they will accumulate more diverse price data, which will enable the model to adapt and refine the demand function in relation to the price parameter.
+
+4.3	Forecasting Engine
+4.3.1	Approach
+
+For the training and validation of the model, we created a realistic dataset, which incorporates demand seasonality to remain realistic in most cases of product in retail. Different models have been tested, using the Root Mean Squared Error (RMSE) score as an evaluation method on the training and validation dataset.
+
+The data has been built by applying a linear function to the real temperature of London measured in the past 6 years and adding a linear function with important noise in the variables of the other parameters. 
+
+Further realistic datasets have been tested and used in the validation part.
+
+4.3.2	SARIMAX
+
+Multiple machine learning and statistical models, such as the Seasonal auto-regressive integrated moving average with exogenous factors (SARIMAX) has been considered, which deals particularly well with time-series and seasonality. The RMSE score was 0.10 in the training data and 0.13 in the validation data. 
+
+The RMSE score of 0.10 was relatively good, but further techniques have been explored to reduce this RMSE score.
+
+4.3.3	XGBoost
+
+The final model used is Extreme Gradient Boosting (XGBoost), originally described in 2016 (Chen & Guestrin, 2016). It has first been tested because of its increasing popularity and success in major data science competitions. XGBoost relies on gradient-boosted trees, which are used to obtain universal function approximators.
+
+The RMSE score was 0.05 on the training data and 0.08 on the validation data. Having tested multiple datasets on XGBoost and SARIMAX, XGBoost always had a better RMSE score through various datasets, so we decided to use this model. No hyperparameter tuning (number of trees, maximum depth of the trees, learning rate and regularisation parameter) has been made in the implementation of the XGBoost model, the accuracy of 0.08 in the RMSE score was considered accurate enough.
+
+5	Results
+5.1	Dashboard Layout
+5.1.1	Landing Page
+
+To create a transparent and user-friendly dynamic pricing tool, a streamlined dashboard was developed, focusing on minimal setup requirements. The goal was to enable users to upload their data as soon as they landed on the website. Once they did so, they could immediately start benefiting from insights on implementing a demand-based dynamic pricing strategy. The challenge lays in balancing simplicity and ease of use with transparency and clarity in how the optimal pricing decisions are made.
+
+For the development of the dashboard, we have coded it using Python Shiny, initially developed on R. Shiny enables its users to develop easy and interactive dashboard very quickly. This makes coding the front-end and connecting the backend quick and easy. 
+
+The landing page features an introductory text at the top, outlining the platform's objectives and structure. This ensures that the dashboard is easily understandable and clear. When users arrive on the landing page, the website’s design is simple to eliminate superfluous information and make the dashboard as straightforward and user-friendly as possible.
+
+There is a sidebar on the left of the dashboard, where the user can upload his data to use the platform. If the user does not have any data, a mock dataset is available, which enables him to access all the features of the dashboard without any personal data. Below this mock data button appears the list of features which are in the dataset, so the user is aware of the parameters used when calculating the optimal price.
+
+Results available in the main part in 3 different tabs, containing plots giving helpful insights into how the optimal price was calculated and using what assumptions. Each plot has next to it a paragraph which explains what it represents and why is it important in the process of understanding demand-based dynamic pricing.
+
+5.1.2	Demand Analysis Tab
+
+The first tab is the problem validation tab, which showcases how demand varies over time. It underlines the necessity of adjusting product prices in response to these demand fluctuations. Once the user has uploaded their data, they can access the following plots.
+
+The first plot is the number of sales over time. This illustrates the variations in sales and emphasises the importance of aligning the product price with these demand changes.
+
+The second plot is the feature importance plot from the model, which shows the most important parameters of their data affecting the demand change. This helps users understand the factors driving demand.
+
+5.1.3	Revenue Management Tab
+
+The second tab is the revenue management tab, which shows users the best price to optimise their revenue. The user needs to input the external parameters X-p for which they want to find the optimal price. The text boxes are located above the tabs on the dashboard. These inputs depend on the information the user has uploaded.
+
+Once they have done this, the dashboard shows 2 plots explaining the optimal price in this context. 
+
+
+The first plot represents the Demand to price function, which depicts how demand varies when price changes given the external parameters. This plot helps the user understands how the platform models price elasticity based on their historical data, enabling them to assess the coherence of these findings.
+
+The second plot is a revenue to price plot, where the demand from the previous plot is multiplied by corresponding prices to calculate revenue. Users are shown exactly how the results are found and can observe the revenue for each potential price.
+
+5.1.4	Methodology Tab
+
+The final tab is the methodology tab, which delves deeper into the accuracy of the model and the process followed throughout the dashboard. This tab is designed for users interested in a more detailed understanding of the model's process. 
+
+The first plot shows the precision of the predictions made by the XGBoost model. It also presents the RMSE score of the model to indicate how well the model is fitting the data. Even though RMSE may be an unfamiliar concept for retailers with little experience in data science, this section is supposed to be made for users seeking an in depth understanding of the model's accuracy and reliability. 
+
+Below the plot is a text section which explains the steps taken by the code to calculate the optimal price. This is to ensure transparency with the user and make sure they are clear with the process used by the dashboard to arrive at the optimal price decision. This section is key for maintaining user trust and clarity in the process.
+
+5.2	Process
+5.2.1	Backend
+
+The dashboard processes the data as follows. First, the user uploads his data, which is then sent to the backend to create the demand variation plot. It is then fitted into an XGBoost model, where the backend can plot the necessary information for tabs 1 and 3 (demand variations, feature definition and model accuracy). The model and the data are stored in a server using the Python library Redis.
+
+Upon data upload, the dashboard identifies the external parameters present in the dataset. It then displays multiple text boxes prompting the user to input all external parameters to find the optimal price. There are two extra text boxes to enter the minimum and maximum price range they want to test the demand-based dynamic pricing on. Next to this is a button for the user to submit the entered information. When clicked, the dashboard collects all the information from the text boxes, stores it in a data frame, and sends it to the backend, stored on the same Redis server.
+
+The backend processes the data stored in the server to generate the demand to price function and revenue to price function plots. Once the plots are created, they are sent to the front-end, which automatically switches to Tab 2. This transition is designed to minimise clicks on the website and to direct users to the most important information of the dashboard, the optimal price and the price elasticity of customers.
+
+The provided solution offers a clear two-step process to determine the optimal price. First, it analyses demand variations based on different parameters. Then, it displays a tab that illustrates demand elasticity and the calculated optimal price. The solution also provides credibility to its recommendation by detailing its accuracy and validation process to the user. Given that the user’s data might not always yield a highly accurate prediction of the optimal price, it is crucial to provide users with an understanding of the model’s precision.
+
+6	Validation
+6.1	Model Validation
+
+For the model validation, we have used different datasets, some varying the price while some not. This was to make sure the model works in both cases.
+
+6.1.1	No Price Variation
+
+In situations where a retailer lacks experience with dynamic pricing, leading to little or no historical data on price variations, a linear elasticity model is employed. This model represents the most basic approach to determine the demand to price function. 
+
+Multiplying each value of demand by its corresponding price reveals a maximum revenue, which characterises the optimal price.
+
+Here, we can therefore see the model accurately identifies a single price and provides an optimal price, from a linear price elasticity function.
+
+6.1.2	Price Variations
+
+Now looking at an example where the dataset includes price variations, we can observe that the price elasticity is not perfectly linear as it is in the example in 6.1.1. Nevertheless, it follows a similar curve, which validates the assumption of a linear function being a good starting point when there is no price variation. The price elasticity curve demonstrates a pattern that is relatively similar to the linear model's predictions.
+
+Further insights can be gained with significant fluctuations in revenue corresponding to changes in price. These variations highlight the critical importance of correctly pricing products.
+
+It can be observed that revenues increase by 7% ((46-43)/43) when the price varies from 6 to 8. This therefore shows that dynamic pricing may have significant impact on companies’ revenues.
+
+We have demonstrated that the model effectively adjusts to realistic datasets, accommodating scenarios with both price and no price variations. It successfully identifies and suggests an optimal price to the user, thereby validating its applicability and effectiveness in real world settings.
+
+6.2	Seamless Validation
+
+The aim here is to evaluate the objective of reducing customer friction from the user journey defined previously. This is done by mapping the journey of both the solution presented above and of current solutions (not all the exact steps of the other solutions were available, so we mapped the user journey approximately).
+
+Having identified the key steps for both processes, criteria have been searched to evaluate how both processes compare in terms of customer friction. The key criteria identified were lengthy processes with many steps, payment interfaces, information overload, interactive walkthroughs, long forms and creating an account. 
+
+Our solution also has less critical steps. These are the steps of the customer journey which usually get customers out of the onboarding process. In our solution, the main critical step is the need to upload data. However, users can also engage with the platform using a mock example to familiarise themselves with the process. In contrast, other solutions have multiple critical steps. These include creating an account with detailed business information, waiting for a demo (dependent on the platform’s staff availability to schedule a meeting), having to submit personal information and paying for the service. All significantly contribute to increase customer friction and complicate the process before the customer gets an optimal price for their product.
+
+The presented solution here provides less friction, whether it is in terms of the number of steps in the customer journey or the number of important points of friction.
+
+6.3	Transparency Validation
+
+To compare the transparency of the new solution and existing solutions, we adopted the criteria from the paper "Metrics of Transparency" published by the Interdisciplinary Centre for Security and Reliability at the University of Luxembourg. Originally designed to evaluate the transparency of companies regarding their data handling, these metrics also apply well to our context. The metrics defined in the paper are as follows.
+
+Informativeness: Is the system providing accurate or up-to-date information?
+Understandability: Is the system providing enough details on the information for the understanding of the matter?
+Accessibility: Is the system providing information that can be used in different environments?
+Validity: Is the system providing correct and precise mechanisms?
+
+Using these criteria, we can evaluate our solution against existing offerings in demand-based dynamic pricing platforms.
+
+By applying these metrics to assess the transparency of our process, the solution outlined in this paper proves to be more informative, understandable and accessible compared to previous solutions. The solution provided is therefore validated to be more transparent in its process compared to current existing solutions.
+
+6.4	User Validation
+
+To ensure that our product offered an appealing and useful approach to dynamic pricing, we engaged with potential users and experts in the field of dynamic pricing to evaluate the presented dashboard. In total, feedback was gathered from two retailers and two experts. The retailers are senior executives from the glasses and contact lenses industry, each with over 20 years of experience. The experts include a developer who has spent between 5 and 10 years working on dynamic pricing algorithms and the founder of a startup that develops dynamic pricing algorithms for companies (has about 3 years of experience in the field). One of the retailers at the beginning of our conversation immediately mentioned his interest to implement dynamic pricing, but found solutions either not reliable or too expensive. 
+
+All participants found the user journey was straightforward and clear, with well-defined tabs and logically organised, thus supporting our goal of making the product user-friendly.
+
+None of the users however were able to upload their own data, they all used the mock dataset available on the dashboard. The model’s ability to deliver accurate predictions was therefore not directly validated with user-provided data. This limitation was addressed using multiple realistic datasets on the dashboard which included varying degrees of correlation between variables to simulate different scenarios.
+
+Feedback indicated that users with experience in dynamic pricing found the dashboard highly transparent and clear. One of the testers working in online retail had no experience in dynamic pricing. This user found at first the plots difficult to understand, and required some explanation to fully understand every step of the process. This feedback led to further development of the dashboard, where explanations were added next to each plot to clarify the information presented.
+
+The solution has therefore been validated by users, who affirmed the ease of use and transparency of the dashboard.
+
+7	Discussion
+
+This project presents limitations both in terms of applications of the dashboard and use cases with external conditions.
+
+7.1	Applications of the Dashboard
+
+The dashboard has limitations in the information it receives and presents. It strongly depends on the quality of the data input to generate accurate predictions and subsequently determine an optimal price. Feature engineering is nearly impossible in this case which can limit the potential of the data used.
+
+From a results perspective, the dashboard only provides an optimal price from demand considerations and does not assist the user in other important areas such as managing inventories. Nonetheless, if the user understands the tool well, the platform can estimate sales volumes at different price points, which could help stock management decisions. However, this functionality is not explicitly indicated, suggesting a potential area for further enhancement of the dashboard.
+Finally, there is no direct integration to the user’s website, requiring users to connect every time they want to find the optimal price for new external conditions.
+
+7.2	Adapting to the Real World
+
+The dashboard also has limitations in its market responsiveness. It does not account for broader market activities as it lacks capabilities to detect market shifts in real time. Users of our solution could consider integrating it with online web scraping tools to gain a comprehensive view of market trends and competitor activities at the same time. These two tools paired together could potentially enhance the predictive accuracy and responsiveness of the dashboard, making it more robust for dynamic pricing strategies. 
+
+8	Conclusion
+
+This study addresses the crucial gap in the adoption of dynamic pricing strategies within the retail sector, particularly highlighting the barriers related to the complexity and lack of transparency of current solutions. The solution presented in this paper provides a user-friendly, transparent dynamic pricing dashboard which enables retailers to manage and adapt pricing strategies.
+
+The application of this dashboard provides clear advantages for companies, whether it is for their businesses or their knowledge of cutting-edge technologies. By showing the process of calculating the optimal price, retailers gain a better understanding of market behaviour, which aids in strategic decision-making and gives a competitive advantage especially in volatile, saturated markets.
+
+The widespread adoption of this solution faces however several challenges. The dashboard heavily relies on good customer data to perform well and provide accurate recommendations. Further development of the project could focus on expanding the model's capability to include real time data such as competitors. This would offer a more exhaustive view of the market dynamics, considering both predictions and actual market changes.
+
+While dynamic pricing is a great tool for revenue optimisation, its success in the retail sector will depend on the development of solutions that are not only technologically advanced but also transparent and user-friendly, making retailers confident when implementing these solutions.
+
+9	Reflection and Acknowledgements
+
+Reflecting on this master project, being able to spend a year working on a single project, exploring, trying and testing different paths to develop a product has been particularly challenging and rewarding. Pursuing a Master in applied data science for business next year, being able to learn how to tackle a real business problem using data science confirmed my choice to pursue my studies in this field. This is why I was delighted to work with Pierre Pinson, leader in forecasting analytics and winner of the INFORMS Edelman awards with Halfspace.ai and Molslinjen A/S. I also had the opportunity to use the array of skills I have learned over my four years as a design engineer at the Dyson School. Key skills required throughout this project included Data Science, Machine Learning and Computing (Web-development) as well as Design Engineering (Human-Centered Design Engineering). This enabled me to gain the necessary knowledge to understand user journey and validation, making sure the developed product is actually tailored to the target user group.
+
+I would like to thank Professor Pierre Pinson, who has been a fantastic mentor throughout this project. He gave me the opportunity to find the solutions to issues by myself while still being great advice in the development of the solution. Pierre was also very useful in helping me figure out what I wanted to do next year. This project was determinant in confirming my will to pursue my studies in this area.
+ 
+10	 References
+
+
+
+Chen, T. and Guestrin, C. (2016) XGBoost: Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and data mining, ACM Conferences. Available at: https://dl.acm.org/doi/10.1145/2939672.2939785 (Accessed: 04 June 2024). 
+
+Fiig, T., Le Guen, R. and Gauchet, M. (2018) Dynamic pricing of airline offers, IATA. Available at: https://www.iata.org/contentassets/0688c780d9ad4a4fadb461b479d64e0d/dynamic-pricing--of-airline-offers.pdf (Accessed: 04 June 2024). 
+
+Garbarino, E. and Lee, O. (2003) (PDF) Dynamic Pricing in internet retail: Effects on consumer trust, Wiley: Online library. Available at: https://www.researchgate.net/publication/229740251_Dynamic_Pricing_in_Internet_Retail_Effects_on_Consumer_Trust (Accessed: 04 June 2024). 
+
+Spagnuelo, D., Bartolini, C. and Lenzini, G. (2017) Metrics for transparency⋆, Core. Available at: https://core.ac.uk/download/pdf/78370936.pdf (Accessed: 04 June 2024). 

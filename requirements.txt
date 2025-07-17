@@ -1,0 +1,22 @@
+# Core libraries
+sentence-transformers==2.2.2
+transformers==4.26.1
+huggingface-hub==0.11.1
+
+# Langchain + LLM interface
+langchain==0.1.14
+llama-cpp-python==0.2.24
+
+# Vector search
+faiss-cpu==1.7.4
+
+# Math / ML utils
+numpy==1.26.4
+scipy>=1.7.3
+
+# PDF & RTF text extraction
+PyMuPDF==1.25.5
+striprtf==0.0.17
+
+# Jupyter kernel support
+ipykernel==6.29.4

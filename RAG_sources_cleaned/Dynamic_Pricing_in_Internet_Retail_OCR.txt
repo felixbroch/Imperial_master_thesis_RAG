@@ -1,0 +1,236 @@
+
+"Dynamic Pricing in Internet Retail: Effects on Consumer Trust"
+
+
+Ellen Garbarino (Case Western Reserve University)
+Olivia F. Lee (Cleveland State University)
+
+
+1. Abstract
+Individual-level price discrimination is not a new concept, but the Internet has made it a practical reality. While economic theory suggests that dynamic pricing enhances firm profitability by capturing more consumer surplus, anecdotal evidence from online retail experiments reveals negative consumer reactions. Using a two-dimensional conceptualisation of trust—benevolence and competence—this study investigates how experiencing a dynamic pricing event affects both overall trust and the weight attributed to its components. It finds that benevolence trust declines significantly, leading to a marginal drop in overall trust, and its influence on trust formation increases substantially. However, differences based on whether consumers received the higher or lower price were not supported.
+
+2. Introduction
+In late 2000, Amazon.com experimented with dynamic pricing by charging different prices to consumers based on their inferred willingness to pay. Although the infrastructure allowed for this, the transparency of the Internet also exposed the price differences, prompting complaints and negative publicity. Amazon subsequently pledged to stop the practice. This incident suggests that consumers may strongly oppose dynamic pricing, but the universality and causes of such reactions remain unclear.
+
+Dynamic pricing is the practice of adjusting prices in real-time based on supply and demand at the individual transaction level. This includes auction models, name-your-own-price schemes, and, more controversially, prices based on individual willingness to pay. While group-level price discrimination has long existed, technological advances now allow retailers to implement price discrimination at the individual level. Economic theory supports this as a means of maximising profitability through first-degree price discrimination.
+
+Despite theoretical backing, little research has examined how consumers respond to such practices, especially in the context of Internet retail. Context matters, as consumers accept some forms of price discrimination (e.g., student discounts at museums) but not others (e.g., for books or concerts). One key difference in online contexts is the high transparency of information, making consumers more aware of pricing inconsistencies.
+
+3. Research Objectives
+This study aims to explore how dynamic pricing affects consumer trust in online retail. Using an experimental design, it investigates how experiencing dynamic pricing—and whether one receives a higher or lower price—affects:
+
+Mean levels of trust
+The relative weight of benevolence and competence trust in forming overall trust
+This two-dimensional model is drawn from prior research, which sees trust as a function of:
+
+Benevolence (the perception that the firm acts in the customer's interest)
+Competence (the firm's reliability and ability to deliver on promises)
+Although the multidimensional nature of trust has been widely discussed, few studies have tested how specific firm actions, like dynamic pricing, influence each dimension.
+
+4. Dynamic Pricing
+Dynamic pricing is rooted in longstanding economic theory regarding price sensitivity and discrimination. However, only recently has it become practical due to larger, more detailed databases, decreased management costs, and the ability to adjust prices instantly in online environments. These advances enable firms to estimate individual-level demand and apply price discrimination more precisely.
+
+Yet, while firms can use dynamic pricing to optimise profitability, the Internet also empowers consumers. The ease of information sharing—through price comparison tools, multiple accounts, chat rooms, and complaint forums—means customers are now more likely to detect price differences, potentially fuelling dissatisfaction.
+
+Consumers tend to accept price differences when they reflect real cost variations (e.g., higher prices at restaurants than in stores) or are rooted in social norms (e.g., student or senior discounts). Geographic or time-based pricing has also historically worked, largely because customers were unaware of alternate prices. However, pricing based solely on demand—without these rationales—is often perceived as unfair.
+
+In economics, price discrimination is defined as charging different prices for the same product based on demand rather than cost differences. It takes three forms:
+
+First-degree price discrimination: A unique price is charged for each unit, tailored to what the individual is willing to pay. This captures the full consumer surplus but has historically been difficult to implement in consumer markets.
+Second-degree price discrimination: Customers self-select into pricing tiers or packages. Examples include bulk discounts or varying features at different price levels.
+Third-degree price discrimination: Prices differ across identifiable groups, such as students or geographic regions.
+First-degree discrimination is the most profitable theoretically, as it captures all available surplus. But in practice, it risks alienating customers, especially when consumers become aware of others receiving lower prices for identical goods.
+
+Traditionally, sellers possessed more information than buyers, and the Internet widens this imbalance. However, exploiting this asymmetry can erode trust. Singh and Sirdeshmukh (2000) argue that long-term customer relationships depend on maintaining trust, making it essential for firms to consider the reputational costs of data-driven pricing strategies.
+
+5. The Concept of Trust
+Trust has become a pivotal concept across disciplines such as economics, sociology, psychology, management, and marketing. Within marketing, trust is especially significant for building and maintaining long-term relationships with customers—a critical factor in business success.
+
+In the context of Internet retailing, trust takes on even greater importance. The online environment often lacks physical presence or direct human interaction, reducing the available cues consumers typically rely on. At the same time, digital channels introduce new risks: breaches of personal data, fake reviews, inaccurate or outdated information, and unauthorised data collection. These challenges make trust a cornerstone of online consumer behaviour.
+
+Urban, Sultan, and Qualls (2000) argued that online purchasing decisions are based "almost solely on the basis of trust". With limited opportunities to evaluate product quality or seller reliability before purchase, consumers are forced to rely on perceived trustworthiness.
+
+Mayer, Davis, and Schoorman (1995) defined trust as a party’s willingness to be vulnerable to another, based on the expectation that the latter will act in ways beneficial to the trustor. Importantly, trust refers not to the act of taking risk but to the willingness to do so, highlighting its perceptual nature.
+
+Although trust has often been treated as a single overarching construct, increasing evidence supports a multidimensional view. The most widely accepted breakdown is into two components:
+
+Benevolence Trust: The perception that the firm genuinely cares about the customer and will act in their interest—even at the expense of immediate profit. In this view, firms are expected to treat customers fairly, prioritise their wellbeing, and demonstrate goodwill.
+Competence Trust: The belief that the firm is capable of reliably fulfilling its promises. This includes operational elements such as fast delivery, user-friendly website navigation, correct order fulfilment, and accurate billing.
+These two forms of trust function independently but collectively define overall consumer trust. In an online retail context, benevolence is associated with fairness and ethical behaviour, while competence relates to the firm's functional performance.
+
+6. Research Hypotheses
+This section introduces a set of hypotheses grounded in the multidimensional model of trust, aiming to understand how dynamic pricing influences both the mean levels and composition of trust in an online retail setting.
+
+H1: Overall trust is an additive function of perceived benevolence and competence trust.
+
+This hypothesis posits that overall trust in a firm results from the combined influence of two distinct components—benevolence and competence. Both are expected to positively contribute to trust, although their relative weights may vary.
+
+H2: Effects of Exposure to Dynamic Pricing
+
+H2(a): Exposure to a dynamic pricing event will reduce mean overall trust.
+H2(b): Exposure to a dynamic pricing event will reduce benevolence trust.
+H2(c): Exposure to a dynamic pricing event will not affect competence trust.
+The rationale behind this set is that demand-based pricing—commonly perceived as unfair—may erode trust in the retailer’s goodwill but leave perceptions of technical reliability intact.
+
+H3: Impact on Trust Component Weighting
+
+Exposure to a dynamic pricing event will increase the weight given to benevolence trust in the formation of overall trust.
+This is based on the accessibility–diagnosticity framework (Feldman & Lynch, 1988), which posits that when one type of information (e.g., benevolence) is made more salient and appears more relevant, it exerts greater influence on overall judgments.
+
+H4: Direction of Pricing Discrimination Effects
+
+H4(a): Consumers offered the higher price will experience a larger decrease in overall trust than those offered the lower price.
+H4(b): Consumers offered the higher price will experience a larger decrease in benevolence trust.
+H4(c): Competence trust will not differ between those offered higher versus lower prices.
+This hypothesis is grounded in self-relevance theory (Deutsch, 1960), which suggests people are more sensitive to personally disadvantageous outcomes.
+
+H5: Moderation by Price Discrimination Direction
+
+Exposure to a dynamic pricing event will increase the weight given to benevolence trust more strongly for those who received the higher price than for those who received the lower price.
+This hypothesis extends H3 by suggesting that being disadvantaged in the price comparison magnifies the impact of fairness concerns, thereby increasing the weight of benevolence in forming overall trust.
+
+7. Description of the Study
+This section details the experimental methodology used to test the research hypotheses on how dynamic pricing affects consumer trust in online retail contexts.
+
+7.1 Methodology
+
+A between-subjects experimental design was employed. Participants first reported their initial levels of overall trust, benevolence trust, and competence trust in one of two prominent online retailers. Each participant was then exposed to a dynamic pricing scenario, where both they and another shopper received different prices for the same product.
+
+The manipulation involved altering the direction of price discrimination: half the participants saw themselves receiving a higher price (15% above the actual price), while the other half received a lower price (15% below).
+
+To ensure realism and generalisability:
+
+Two product types from popular e-commerce categories were used.
+Mock web pages from well-known retailers were created for the scenario.
+Both firms had high pre-existing trust scores (less than 10% of responses below the midpoint).
+7.2 Participants
+
+The sample included:
+
+165 university students (117 undergraduates and 48 postgraduates) from a large Midwestern US university.
+A balanced mix of moderate Internet users (60%) and both light (16%) and heavy users (24%).
+52% had made an online purchase within the past three months.
+7.3 Procedure
+
+The experiment followed these steps:
+
+Initial Trust Measurement: Participants rated their trust in the retailer on benevolence, competence, and overall dimensions.
+Dynamic Pricing Scenario: Participants were shown a situation where they and another customer received different prices for the same product, reinforced visually with screenshots.
+Post-Exposure Measures: Trust ratings were collected again. Manipulation checks and demographic questions followed.
+Debrief: Participants were informed the pricing scenario was fictional and not reflective of real retailer behaviour.
+The entire process lasted around 15 minutes per participant.
+
+7.4 Measures
+
+Trust was measured using 7-point Likert scales, adapted from previous studies:
+
+Benevolence trust: 5 items capturing perceived goodwill (e.g., “[Retailer] acts in the best interest of the customer”).
+Competence trust: 5 items focusing on operational performance (e.g., efficient checkout, timely delivery).
+Overall trust: 2 summary items assessing general confidence in the retailer.
+Measurement reliability was confirmed (Cronbach’s alpha: all > 0.79 post-event, with benevolence reaching 0.94). Composite scores were computed by averaging relevant items.
+
+8. Results
+This section presents the findings of the study, organised around the hypotheses related to trust levels, component weightings, and the effect of being offered a higher price during a dynamic pricing event.
+
+8.1 Sample Validation and Data Treatment
+
+Of the 165 participants, 23 (12%) failed the manipulation check (i.e. they misremembered the nature of the price difference). These cases were removed from further analysis, leaving 142 valid responses. Factor analysis confirmed a clear separation between benevolence and competence trust items, though three competence items cross-loaded and were excluded for clarity.
+
+Final scale reliability remained high:
+
+Benevolence trust: α = 0.94 (post)
+Competence trust: α = 0.79 (post)
+Overall trust: α = 0.92 (post)
+8.2 Hypothesis Testing
+
+H1: Trust Composition
+Regression analysis confirmed that overall trust is a significant additive function of both benevolence and competence trust (R² = 0.64). The initial trust model indicated that:
+
+Competence trust had a stronger influence (β = 0.61)
+Benevolence trust had a lesser but still significant influence (β = 0.35)
+H1 supported.
+
+H2: Mean Trust Effects of Dynamic Pricing
+Overall trust declined marginally post-event (mean = 4.47 to 3.59; p < 0.06)
+Benevolence trust declined significantly (mean = 4.27 to 3.57; p < 0.001)
+Competence trust remained unchanged (mean = 4.27 pre and post; p > 0.53)
+H2(a) and H2(b) supported; H2(c) also supported.
+
+H3: Changes in Trust Weighting
+Post-event, the weight given to benevolence trust increased dramatically in forming overall trust (from β = 0.35 to β = 0.90, p < 0.001). Conversely, the weight given to competence trust dropped (from β = 0.61 to β = 0.28).
+H3 supported.
+
+H4: Effects of Being Offered the Higher Price
+Those offered the higher price reported slightly lower overall trust than those offered the lower price (means: 3.48 vs 3.69; p < 0.08), but this was only marginally significant.
+No significant differences were found in benevolence trust or competence trust between high-price and low-price groups.
+H4 only partially supported.
+
+H5: Trust Weighting and Price Direction
+The hypothesis that those offered the higher price would place more weight on benevolence trust was not supported. In fact, the opposite trend was observed, with the lower-price group showing slightly higher benevolence weighting (β = 0.90 vs 0.70), though this difference was not statistically significant (p < 0.06).
+H5 not supported.
+
+9. Discussion
+This study set out to explore how consumers react to dynamic pricing practices in the context of Internet retail, specifically how such practices influence trust in the retailer. The findings offer several important insights into both consumer psychology and pricing strategy.
+
+9.1 Summary of Key Findings
+
+Dynamic pricing reduces trust: As hypothesised, consumers exposed to dynamic pricing reported lower levels of benevolence trust, which in turn contributed to a decline in overall trust. Importantly, this trust erosion occurred even when participants were offered a lower price than another customer.
+Benevolence trust is more affected than competence trust: Dynamic pricing had a clear and isolated effect on benevolence trust (i.e. perceptions of the retailer’s intentions and fairness), while competence trust (i.e. reliability, delivery, site design) remained unaffected. This distinction validates the two-dimensional view of trust.
+Weighting of trust components shifts: Following exposure to dynamic pricing, consumers placed greater emphasis on benevolence trust in the formation of overall trust. This finding aligns with the accessibility-diagnosticity framework and highlights that trust is not only about how much exists, but also about how it is composed.
+Price direction effects are weaker than expected: Contrary to predictions, whether participants received a higher or lower price did not significantly affect benevolence trust or trust weighting. This suggests that perceived fairness and social norms may override individual gain or loss.
+9.2 Theoretical Contributions
+
+This study contributes to several research domains:
+
+Trust theory: It reinforces the multidimensional structure of trust and demonstrates that firm actions can alter both mean trust levels and the relative importance of trust dimensions.
+Pricing strategy: It shows that first-degree price discrimination (dynamic pricing) has the potential to damage the relational equity between consumers and firms, despite its economic efficiency.
+Consumer behaviour: It highlights the role of social norms and perceived fairness in shaping responses to pricing, suggesting that traditional economic assumptions (e.g. rational agents maximising utility) may be insufficient in explaining real-world consumer reactions.
+9.3 Practical Implications for Online Retailers
+
+Retailers considering dynamic pricing strategies must weigh short-term profit potential against long-term brand equity and customer trust. Key takeaways include:
+
+Transparency is key: Firms should clearly explain their pricing logic and avoid practices that may be interpreted as exploitative.
+Trust repair mechanisms are necessary: If dynamic pricing is used, firms should invest in trust-building communications, such as loyalty rewards, apologies, or guarantees.
+Segmentation must be handled with care: While micro-targeting based on individual data may seem appealing, it may backfire if consumers perceive the process as unfair or manipulative.
+Equal pricing norms still dominate: The strong consumer reaction to price disparities—even among those benefiting—suggests that the norm of equal treatment remains powerful.
+
+10. Limitations and Future Research
+While this study offers valuable insights into the psychological and behavioural impacts of dynamic pricing on consumer trust, several limitations should be acknowledged, and directions for future research proposed.
+
+10.1 Limitations
+
+Hypothetical scenario design
+The use of simulated dynamic pricing scenarios may not capture the full emotional intensity or behavioural consequences of real-life pricing encounters. Respondents were not using their own money nor making an actual purchase decision, which could diminish the ecological validity of the findings.
+Student sample
+The study’s sample consisted primarily of undergraduate and graduate students from a single American university. This population may not fully represent broader consumer demographics in terms of age, income, digital experience, or cultural perceptions of fairness and trust.
+Static firm context
+Only two online retailers were tested, both perceived as highly trustworthy. This limits generalisability to retailers with lower or more variable trust reputations.
+Limited behavioural outcomes
+The study focuses on changes in trust but does not directly measure downstream consequences such as actual purchasing decisions, customer defection, complaint behaviour, or willingness to pay.
+Single exposure to dynamic pricing
+The experiment assessed reactions after a single pricing encounter. In practice, consumers might respond differently over time, especially if exposed repeatedly or if the pricing logic is clearly communicated.
+10.2 Future Research Directions
+
+Real-world experimentation
+Future studies could leverage field experiments or A/B testing in live e-commerce environments to observe actual behaviour in response to dynamic pricing. This would enhance external validity and capture long-term impacts.
+Cross-cultural analysis
+Cultural norms influence perceptions of fairness and trust. Research across different countries could reveal how attitudes toward dynamic pricing vary and which cultural factors moderate consumer reactions.
+Alternative pricing contexts
+Studies could explore consumer responses to other forms of personalised pricing (e.g. loyalty-based discounts, algorithmic recommendations, or negotiated pricing) to assess whether perceived fairness varies across implementations.
+Longitudinal impact on loyalty and lifetime value
+Research should investigate how repeated exposure to dynamic pricing affects long-term customer loyalty, word-of-mouth, brand advocacy, and customer lifetime value. Trust decay curves could be modelled to anticipate tipping points.
+Moderating role of communication and transparency
+Further investigation is needed on whether firms can mitigate negative effects by clearly communicating pricing rationale, providing price-matching guarantees, or involving customers in the pricing process.
+Consumer coping strategies
+Future work could explore how consumers adapt to dynamic pricing—whether by using price comparison tools, switching platforms, employing multiple identities, or initiating public backlash. Understanding these strategies would be valuable for shaping sustainable pricing policies.
+
+11. Conclusion and Final Reflections
+This research provides a robust empirical contribution to our understanding of how dynamic pricing in Internet retail environments affects consumer trust. Drawing on a two-dimensional model of trust—benevolence and competence—it demonstrates that exposure to a dynamic pricing event can significantly diminish perceived benevolence trust, which in turn slightly reduces overall trust. Although competence trust remains largely unaffected, the salience and weight of benevolence trust in shaping overall trust markedly increases following a dynamic pricing event.
+
+The study also reveals that contrary to expectations, the direction of the pricing discrimination (i.e. receiving a higher versus lower price) does not significantly impact the decline in trust or its composition. This suggests that merely becoming aware of discriminatory pricing, regardless of the specific outcome, can damage trust by violating perceived norms of fairness and transparency.
+
+These findings have meaningful implications for online retailers navigating the tension between profitability and customer relationship management. While dynamic pricing offers opportunities for economic efficiency and surplus extraction, it comes at the cost of customer goodwill and perceived fairness—especially in a context like Internet retail, where transparency is high, and trust is critical due to the impersonal nature of transactions.
+
+In an increasingly data-driven environment, firms must therefore proceed with caution. Reaping the benefits of personalised pricing requires not just technological sophistication but also ethical consideration, effective communication, and long-term strategic thinking. Businesses that disregard the psychological and relational consequences of their pricing decisions risk alienating their customer base, undermining brand equity, and compromising sustainable growth.
+
+Ultimately, this study reminds practitioners and academics alike that pricing is not purely a mathematical exercise but a deeply human one, embedded within social norms and moral expectations. The real challenge lies in balancing optimisation with empathy—a task that becomes ever more vital as digital commerce continues to evolve.
